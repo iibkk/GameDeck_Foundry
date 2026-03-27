@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GameDeck Foundry | Login</title>
+    <link rel="stylesheet" href="Game.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+        </nav>
+    </header>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <div class="content">
+            <h2 class="logo"><i class="bx bxs-book"></i> GameDeck</h2>
+            <div class="text-sci">
+                <h2>Welcome!<br><span>To GameDeck!</span></h2>
+                <p>An interactive educational card game platform.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="bx bxl-linkedin"></i></a>
+                    <a href="#"><i class="bx bxl-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="logreg-box">
+
+            <div class="form-box" id="roleSelectPanel" style="z-index: 10;">
+                <h2>Select Your Role</h2>
+                <div style="margin-top: 30px; width: 340px;">
+                    <button class="role-btn" id="btnGoTeacher">
+                        <i class='bx bx-chalkboard'></i> Teacher
+                    </button>
+                    <button class="role-btn" id="btnGoStudent">
+                        <i class='bx bx-user'></i> Student
+                    </button>
+                </div>
+            </div>
+
+            <div id="teacherWrapper" class="hidden"
+                style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+
+                <div class="form-box login">
+                    <form action="#" class="login">
+                        <h2>Log In</h2>
+                        <div class="input-box">
+                            <span class="icon"><i class="bx bxs-envelope"></i></span>
+                            <input type="email" required>
+                            <label>Email</label>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                            <input type="password" required>
+                            <label>Password</label>
+                        </div>
+                        <button type="submit" class="btn">Log In</button>
+                        <div class="login-register">
+                            <p>Don't have an account ? <a href="#" class="register-link">Sign Up</a></p>
+                        </div>
+                        <button type="button" class="back-btn backToRole">← Back</button>
+                    </form>
+                </div>
+
+                <div class="form-box register">
+                    <form action="#" class="register">
+                        <h2>Sign Up</h2>
+                        <div class="input-box">
+                            <span class="icon"><i class="bx bxs-envelope"></i></span>
+                            <input type="email" required>
+                            <label>Email</label>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><i class="bx bxs-user"></i></span>
+                            <input type="text" required>
+                            <label>Name</label>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                            <input type="password" required>
+                            <label>Password</label>
+                        </div>
+                        <button type="submit" class="btn">Sign Up</button>
+                        <div class="login-register">
+                            <p>Already have an account ? <a href="#" class="login-link">Sign In</a></p>
+                        </div>
+                        <button type="button" class="back-btn backToRole">← Back</button>
+                    </form>
+                </div>
+
+            </div>
+            <div class="form-box hidden" id="studentPanel" style="z-index: 10;">
+                <form action="#" id="studentForm">
+                    <h2>Join Game</h2>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-hash'></i></span>
+                        <input type="text" id="roomCodeInput" required maxlength="6" style="text-transform: uppercase;">
+                        <label>Room Code</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-user'></i></span>
+                        <input type="text" id="nicknameInput" required>
+                        <label>Nickname</label>
+                    </div>
+                    <button type="submit" class="btn" style="background: #2196f3;">Join Now</button>
+                    <button type="button" class="back-btn backToRole">← Back to Roles</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="Game.js"></script>
+</body>
+
+</html>
