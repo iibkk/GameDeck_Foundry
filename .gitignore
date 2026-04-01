@@ -5,4 +5,17 @@
 [Bb]uilds/
 [Ll]ogs/
 UserSettings/
+.vscode/
 .DS_Store
+*.csproj
+*.sln
+*.slnx
+*.user
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+mono_crash.*
