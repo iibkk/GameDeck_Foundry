@@ -49,12 +49,12 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.3.11f1/Unity.app/Contents/Resources/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/midCardDrop.cs" />
-    <Compile Include="Assets/IDropArea.cs" />
+    <Compile Include="Assets/Script/midCardDrop.cs" />
+    <Compile Include="Assets/Script/cardDelete.cs" />
+    <Compile Include="Assets/Script/CardDisplay.cs" />
+    <Compile Include="Assets/Script/IDropArea.cs" />
     <Compile Include="Assets/Script/handManager.cs" />
-    <Compile Include="Assets/CardDisplay.cs" />
-    <Compile Include="Assets/Card.cs" />
-    <Compile Include="Assets/cardDelete.cs" />
+    <Compile Include="Assets/Script/Card.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
