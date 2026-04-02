@@ -1,56 +1,26 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Card : MonoBehaviour
+namespace Composition
 {
-    private bool isDragging = false;
-    private Vector3 startDrag;
-    private Collider2D colli;
-
-    void Start()
+    public class Card : Dragable
     {
-        colli = GetComponent<Collider2D>();
-    }
+        private bool isFaceUp = true;
+        public midCardDrop currPile;
 
-    void Update()
-    {
-        if (Camera.main == null) return;
-        if (Mouse.current == null) return;
-
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        public void DropCard(IDropArea cardDropArea)
         {
-            Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos);
-
-            if (hit != null && hit.gameObject == gameObject)
-            {
-                isDragging = true;
-                startDrag = transform.position;
-                Debug.Log("Start dragging card");
-            }
+            cardDropArea.dropArea(this);
         }
 
-        if (isDragging)
+
+        void Update()
         {
-            transform.position = new Vector3(mouseWorldPos.x, mouseWorldPos.y, 0f);
-        }
-
-        if (Mouse.current.leftButton.wasReleasedThisFrame && isDragging)
-        {
-            isDragging = false;
-
-            colli.enabled = false;
-            Collider2D hitCollider = Physics2D.OverlapPoint(mouseWorldPos);
-            colli.enabled = true;
-
-            if (hitCollider != null && hitCollider.TryGetComponent(out IDropArea cardDropArea))
+            DragWithMouse();
+            if (colItem != null)
             {
-                cardDropArea.dropArea(this);
-            }
-            else
-            {
-                transform.position = startDrag;
+                DropCard(colItem);
+                colItem = null;
             }
         }
     }

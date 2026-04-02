@@ -1,3 +1,4 @@
+using Composition;
 using UnityEngine;
 public interface IDropArea
 {
