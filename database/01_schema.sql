@@ -1,0 +1,13 @@
+-- GameDeck Foundry Database Schema
+-- Recommended DBMS: PostgreSQL
+
+-- 1. users
+-- 2. games
+-- 3. decks
+-- 4. card_assets
+-- 5. cards
+-- 6. content_items
+-- 7. sessions
+-- 8. session_players
+-- 9. card_assignments
+-- 10. event_logs
