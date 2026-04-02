@@ -1,20 +1,6 @@
 -- GameDeck Foundry Database Schema
 -- Recommended DBMS: PostgreSQL
 
--- 1. users
--- 2. games
--- 3. decks
--- 4. card_assets
--- 5. cards
--- 6. content_items
--- 7. sessions
--- 8. session_players
--- 9. card_assignments
--- 10. event_logs
-
--- GameDeck Foundry Database Schema
--- Recommended DBMS: PostgreSQL
-
 -- Drop tables in reverse dependency order if needed
 DROP TABLE IF EXISTS event_logs CASCADE;
 DROP TABLE IF EXISTS card_assignments CASCADE;
@@ -34,7 +20,8 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
     role VARCHAR(20) NOT NULL CHECK (role IN ('teacher', 'admin')),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 2. games
@@ -46,6 +33,7 @@ CREATE TABLE games (
     ruleset_type VARCHAR(50),
     visibility VARCHAR(20) DEFAULT 'private' CHECK (visibility IN ('private', 'public', 'classroom')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_games_teacher
         FOREIGN KEY (teacher_id)
         REFERENCES users(user_id)
@@ -59,6 +47,7 @@ CREATE TABLE decks (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_decks_game
         FOREIGN KEY (game_id)
         REFERENCES games(game_id)
@@ -107,6 +96,7 @@ CREATE TABLE content_items (
     difficulty VARCHAR(20) CHECK (difficulty IN ('easy', 'medium', 'hard')),
     tags TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_content_items_game
         FOREIGN KEY (game_id)
         REFERENCES games(game_id)
@@ -117,6 +107,7 @@ CREATE TABLE content_items (
 CREATE TABLE sessions (
     session_id SERIAL PRIMARY KEY,
     game_id INTEGER NOT NULL,
+    teacher_id INTEGER,
     join_code VARCHAR(20) NOT NULL UNIQUE,
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'paused', 'ended')),
     started_at TIMESTAMP,
@@ -124,7 +115,11 @@ CREATE TABLE sessions (
     CONSTRAINT fk_sessions_game
         FOREIGN KEY (game_id)
         REFERENCES games(game_id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_sessions_teacher
+        FOREIGN KEY (teacher_id)
+        REFERENCES users(user_id)
+        ON DELETE SET NULL
 );
 
 -- 8. session_players
@@ -187,3 +182,13 @@ CREATE TABLE event_logs (
         REFERENCES cards(card_id)
         ON DELETE SET NULL
 );
+
+-- Indexes for performance
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_games_teacher_id ON games(teacher_id);
+CREATE INDEX idx_decks_game_id ON decks(game_id);
+CREATE INDEX idx_cards_deck_id ON cards(deck_id);
+CREATE INDEX idx_sessions_join_code ON sessions(join_code);
+CREATE INDEX idx_session_players_session_id ON session_players(session_id);
+CREATE INDEX idx_card_assignments_session_id ON card_assignments(session_id);
+CREATE INDEX idx_event_logs_session_id ON event_logs(session_id);
