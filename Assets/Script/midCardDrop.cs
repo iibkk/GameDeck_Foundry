@@ -15,7 +15,7 @@ public class midCardDrop : MonoBehaviour, IDropArea
         {
             card.currPile.RemoveCard(card);
         }
-        card.transform.SetParent(transform);
+        //card.transform.SetParent(transform);
         AddCard(card);
 
         Debug.Log("Card Drop here");

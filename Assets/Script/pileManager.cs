@@ -5,7 +5,7 @@ public class pileManager : midCardDrop
 {
     public override void UpdateCardPosition(Card card)
     {
-        card.transform.position = transform.position;
+        card.Move(transform.position);
         card.transform.rotation = transform.rotation;
     }
 }

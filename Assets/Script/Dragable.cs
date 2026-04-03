@@ -3,17 +3,34 @@ using UnityEngine.InputSystem;
 
 public class Dragable : MonoBehaviour
 {
-    private bool isDragging = false;
     private Vector3 startDrag;
-    private Collider2D colli;
     public IDropArea colItem = null;
 
-    void Start()
+
+    public void StartDragging()
     {
-        colli = GetComponent<Collider2D>();
+        startDrag = transform.position;
     }
 
 
+    public void Move(Vector2 pos)
+    {
+        transform.position = new Vector3(pos.x, pos.y, 0f);
+    }
+
+
+    public void StopDragging(IDropArea dropAreaFound)
+    {
+        colItem = dropAreaFound;
+
+        if (dropAreaFound == null)
+        {
+            colItem = null;
+            transform.position = startDrag;
+        }
+    }
+
+    /*
     public void DragWithMouse()
     {
         if (Camera.main == null) return;
@@ -23,7 +40,7 @@ public class Dragable : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos);
+            Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos, cardLayer);
 
             if (hit != null && hit.gameObject == gameObject)
             {
@@ -43,12 +60,22 @@ public class Dragable : MonoBehaviour
             isDragging = false;
 
             colli.enabled = false;
-            Collider2D hitCollider = Physics2D.OverlapPoint(mouseWorldPos);
+            Collider2D[] hitColliders = Physics2D.OverlapPointAll(mouseWorldPos);
+            IDropArea dropAreaFound = null;
             colli.enabled = true;
+
+            foreach (Collider2D hit in hitColliders)
+            { 
+                if (hit.TryGetComponent(out IDropArea dropArea))
+                {
+                    dropAreaFound = dropArea;
+                    break;
+                }
+            }
             
-            if (hitCollider != null && hitCollider.TryGetComponent(out IDropArea cardDropArea))
+            if (dropAreaFound != null)
             {
-                colItem = cardDropArea;
+                colItem = dropAreaFound;
             }
             else
             {
@@ -58,4 +85,5 @@ public class Dragable : MonoBehaviour
         }
         
     }
+    */
 }

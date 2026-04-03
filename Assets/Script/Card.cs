@@ -16,7 +16,8 @@ namespace Composition
 
         void Update()
         {
-            DragWithMouse();
+            Debug.Log(LayerMask.LayerToName(gameObject.layer));
+
             if (colItem != null)
             {
                 DropCard(colItem);

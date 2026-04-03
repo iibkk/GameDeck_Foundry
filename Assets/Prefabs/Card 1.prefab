@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3235053877136427473}
   - component: {fileID: 8291292118814488978}
   - component: {fileID: 1356645659597568382}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NumberText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,10 +206,10 @@ GameObject:
   - component: {fileID: 1388054464762304890}
   - component: {fileID: 5725100875142157707}
   - component: {fileID: 3966488528599287135}
+  - component: {fileID: 2605247309271434362}
   - component: {fileID: 3919115838850807544}
-  - component: {fileID: 2532935691038168649}
-  - component: {fileID: 2808966812111384976}
-  m_Layer: 0
+  - component: {fileID: 7414410888571326885}
+  m_Layer: 9
   m_Name: Card 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,6 +337,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &2605247309271434362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9131223639532038870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c228bd63db94d088f58ae6b2b9f725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Composition.Card
+  currPile: {fileID: 0}
 --- !u!114 &3919115838850807544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardDisplay
   numberText: {fileID: 8291292118814488978}
---- !u!114 &2532935691038168649
+--- !u!114 &7414410888571326885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,16 +375,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418da487bbd2a5747b5f1d0a19cce3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dragable
---- !u!114 &2808966812111384976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9131223639532038870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c228bd63db94d088f58ae6b2b9f725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Composition.Card
-  currPile: {fileID: 0}
