@@ -1,30 +1,51 @@
-# EnzeZm-login
+(Teacher Registration)
+port address: `POST http://localhost:3000/api/auth/register`
+frontend send (Body):
+  ```json
+  {
+    "email": "teacher@adelaide.edu.au",
+    "full_name": "Teacher Name",
+    "password": "mySecurePassword"
+  }
 
+backend (success 200): {"message": "User registered successfully"}
 
-teacher login port： POST /api/auth/register
-
-fe send： {"email": "...", "username": "...", "password": "..."}
-
-be feedback： succes: 200/201；if email duplicate，feedback {"message": "email execest"}。
-
-
-
-teacher login port： POST /api/auth/login
-
-fe send： {"email": "...", "password": "..."}
-
-be feedback： sucess back {"token": "your JWT num"}；fail reply {"message": "wrong password"}。
+backend (fail 400): {"message": "User already exists"}
 
 
 
-student joining code： POST /api/game/join
-
-fe send： {"roomCode": "X7R2", "nickname": "Enze"}
-
-be feedback： go to database to search this code，had and active，reply 200 and {"token": "temporary sessionToken"}；if donest reply {"message": "room does not appear"}。
 
 
-3 URL are: register login studentjoin
-71 register
-106 login
-144 join
+Teacher Login：
+POST http://localhost:3000/api/auth/login
+
+frontend：
+{
+  "email": "teacher@adelaide.edu.au",
+  "password": "mySecurePassword"
+}
+
+backend feedback (success 200): ```json
+{
+"token": "eyJhbGciOiJIUzI1...",
+"user": { "user_id": 1, "role": "teacher" }
+}
+*(frontend had alreday take token save in localStorage of `gameDeckToken` )*
+
+
+
+
+
+（Student Join)
+POST http://localhost:3000/api/session/join
+
+
+frontend send：
+{
+  "join_code": "X7R2",
+  "player_name": "Student A"
+}
+
+The backend returned (success 200): JSON containing session and player objects.
+
+(Note: The frontend has intercepted session_player_id and session_id and is preparing to send them to Unity.)
