@@ -71,7 +71,7 @@ registerForm.addEventListener('submit', async (e) => {
     const response = await fetch('http://localhost:3000/api/game/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, username: username, password: password })
+      body: JSON.stringify({ email: email, full_name: username, password: password })
     });
 
     // If successful (status code 200 or 201)
@@ -103,7 +103,7 @@ loginForm.addEventListener('submit', async (e) => {
   const password = inputs[1].value;
 
   try {//(teacher login URL change here)
-    const response = await fetch('http://localhost:3000/api/game/register', {
+    const response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, password: password })
@@ -141,10 +141,10 @@ document.getElementById('studentForm').addEventListener('submit', async function
   try {
     // [Backend Integration Point 1: Modify this URL]
     // Once the Node.js backend is ready, replace the URL below with the real API address
-    const response = await fetch('http://localhost:3000/api/game/join', {
+    const response = await fetch('http://localhost:3000/api/session/join', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ roomCode: roomCode, nickname: nickname })
+      body: JSON.stringify({ join_code: roomCode, player_name: nickname })
     });
 
     if (response.ok) {
