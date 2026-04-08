@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Readly_Bookshelf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="teacher-dashboard.css">
+</head>
+
+<body>
+    <div class="title-section">
+        <h1><i class="bx bx-book-open"></i> Welcome to Your GameDeck!</h1>
+    </div>
+
+    <div class="content">
+        <div class="dashboard-cards">
+            <div class="card">
+                <i class='bx bx-library card-icon'></i>
+                <h3>Manage Decks</h3>
+                <p>Upload card images, edit content, and create new learning decks.</p>
+                <button class="action-btn">Edit Decks</button>
+            </div>
+
+            <div class="card highlight">
+                <i class='bx bx-joystick card-icon'></i>
+                <h3>Host a Game</h3>
+                <p>Start a new interactive session and invite your students.</p>
+                <button class="action-btn start-game-btn" onclick="window.location.href='unity-game.html'">Launch Unity
+                    Game</button>
+            </div>
+
+            <div class="card logout-card">
+                <i class='bx bx-log-out-circle card-icon'></i>
+                <h3>Logout</h3>
+                <p>Securely sign out of your teacher account.</p>
+                <button class="action-btn logout-btn" id="logoutBtn">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="teacher-dashboard.js"></script>
+
+    <footer>
+        <nav class="navbar">
+            <a href="#"><i class="bx bx-home"></i> Home</a>
+            <a href="#"><i class="bx bx-book"></i> Shelf</a>
+            <a href="#"><i class="bx bx-note"></i> Notes</a>
+            <a href="#"><i class="bx bx-user"></i> Myself</a>
+            <a href="#"><i class="bx bx-cog"></i> Services</a>
+        </nav>
+        <form action="#" class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button type="submit" aria-label="Search" title="Search">
+                <i class="bx bx-search" aria-hidden="true"></i>
+            </button>
+        </form>
+    </footer>
+</body>
+
+</html>

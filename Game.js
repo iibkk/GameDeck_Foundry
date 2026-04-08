@@ -68,7 +68,7 @@ registerForm.addEventListener('submit', async (e) => {
 
   try {
     // Send POST request to backend (assuming Node.js runs on localhost:3000)(register change here)
-    const response = await fetch('http://localhost:3000/api/game/join', {
+    const response = await fetch('http://localhost:3000/api/game/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, username: username, password: password })
@@ -103,7 +103,7 @@ loginForm.addEventListener('submit', async (e) => {
   const password = inputs[1].value;
 
   try {//(teacher login URL change here)
-    const response = await fetch('http://localhost:3000/api/game/join', {
+    const response = await fetch('http://localhost:3000/api/game/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, password: password })
