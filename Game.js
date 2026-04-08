@@ -55,7 +55,7 @@ loginLink.addEventListener("click", (e) => {
 // ==========================================
 // 3. [NEW] Teacher real registration logic (Register)
 // ==========================================
-const registerForm = document.querySelector('.register');
+const registerForm = document.querySelector('form.register');
 
 registerForm.addEventListener('submit', async (e) => {
   e.preventDefault(); // Prevent default form submission and page refresh
@@ -75,10 +75,33 @@ registerForm.addEventListener('submit', async (e) => {
     });
 
     // If successful (status code 200 or 201)
+    // If successful (status code 200 or 201)
     if (response.ok) {
-      alert('Registration successful! Please log in.');
-      logregBox.classList.remove("active"); // Smoothly slide back to the login interface
-      registerForm.reset(); // Clear the completed form
+      // 1. succuess
+      alert('Registration successful! Automatically logging you in...');
+
+      try {
+        // 2. 
+        const loginResponse = await fetch('http://localhost:3000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, password: password })
+        });
+
+        if (loginResponse.ok) {
+          const loginData = await loginResponse.json();
+
+          // 3.  save Token loacl
+          localStorage.setItem('gameDeckToken', loginData.token);
+
+          registerForm.reset();
+          window.location.href = 'teacher-dashboard.html';
+        }
+      } catch (loginErr) {
+        console.error('Auto-login failed:', loginErr);
+        logregBox.classList.remove("active");
+        registerForm.reset();
+      }
     } else {
       // If backend returns an error (e.g., email already registered)
       const errorData = await response.json();
@@ -93,7 +116,7 @@ registerForm.addEventListener('submit', async (e) => {
 // ==========================================
 // 4. [NEW] Teacher real login logic (Login)
 // ==========================================
-const loginForm = document.querySelector('.login');
+const loginForm = document.querySelector('form.login');
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
