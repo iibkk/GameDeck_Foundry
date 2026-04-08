@@ -28,3 +28,7 @@ be feedback： go to database to search this code，had and active，reply 200 a
 71 register
 106 login
 144 join
+
+
+
+cd "D:\ICT_project1_private\GameDeck_Foundry-backend_api\backend"
