@@ -68,7 +68,7 @@ registerForm.addEventListener('submit', async (e) => {
 
   try {
     // Send POST request to backend (assuming Node.js runs on localhost:3000)(register change here)
-    const response = await fetch('http://localhost:3000/api/game/register', {
+    const response = await fetch('http://localhost:3000/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, full_name: username, password: password })
@@ -150,11 +150,16 @@ document.getElementById('studentForm').addEventListener('submit', async function
     if (response.ok) {
       // Room found successfully
       const data = await response.json();
+
+      localStorage.setItem('gameDeckStudentId', data.player.session_player_id);
+      localStorage.setItem('gameDeckSessionId', data.session.session_id); // 顺便把房间 ID 也存下来，Unity 可能会用
+
       alert("Welcome " + nickname + "! Room found. Loading Game...");
 
-      // [Backend Integration Point 2: Save backend credentials]
-      // To let Unity know which student entered, the backend usually returns a sessionToken. We need to save it.
-      localStorage.setItem('studentSessionToken', data.token); // Assuming backend returns { "token": "..." }
+
+      // // [Backend Integration Point 2: Save backend credentials]
+      // // To let Unity know which student entered, the backend usually returns a sessionToken. We need to save it.
+      // localStorage.setItem('studentSessionToken', data.token); // Assuming backend returns { "token": "..." }
 
       // [Backend Integration Point 3: Modify redirect page]
       // Change this to the actual HTML file name where your Unity WebGL game is hosted.

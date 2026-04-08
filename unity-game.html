@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Readly_Bookshelf</title>
@@ -13,24 +14,60 @@
         <h1><i class="bx bx-book-open"></i> Welcome to Your GameDeck!</h1>
     </div>
 
-    <div class="content">
-        <p>What we need to put here?</p>
+    <div class="content" style="display: flex; flex-direction: column; align-items: center;">
+        <canvas id="unity-canvas" width="960" height="600"
+            style="background: #231F20; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5);"></canvas>
+
+        <div style="margin-top: 15px;">
+            <button onclick="window.location.href='Game.html'"
+                style="padding: 10px 20px; border: none; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer;">
+                <i class='bx bx-exit'></i> Exit Game
+            </button>
+        </div>
     </div>
+
+    <script>
+        // 这里只是你提前写好的发送逻辑。
+        // 等负责 Unity 的同学打包出游戏后，他会有一个叫做 createUnityInstance() 的函数。
+        // 你需要让他把下面这段逻辑，粘贴到他那个函数加载成功的地方！
+
+        function sendDataToUnity(unityInstance) {
+            console.log("准备向 Unity 发送学生数据...");
+
+            // 1. 从刚才 Game.js 存的地方把 ID 拿出来
+            const studentId = localStorage.getItem('gameDeckStudentId');
+            const sessionId = localStorage.getItem('gameDeckSessionId');
+
+            if (studentId && sessionId) {
+                // 2. 拼成字符串传过去
+                const dataToPass = studentId + "," + sessionId;
+
+                // 3. 跨界喊话：呼叫 Unity 里的 GameManager 物体
+                unityInstance.SendMessage('GameManager', 'ReceivePlayerData', dataToPass);
+                console.log("数据已成功发送给 Unity: " + dataToPass);
+            } else {
+                console.error("找不到学生缓存数据！");
+                alert("Session lost. Please return to the homepage and join again.");
+                window.location.href = 'Game.html'; // 数据丢失就踢回首页
+            }
+        }
+    </script>
 
     <footer>
         <nav class="navbar">
-        <a href="#"><i class="bx bx-home"></i> Home</a>
-        <a href="#"><i class="bx bx-book"></i> Shelf</a>
-        <a href="#"><i class="bx bx-note"></i> Notes</a>
-        <a href="#"><i class="bx bx-user"></i> Myself</a>
-        <a href="#"><i class="bx bx-cog"></i> Services</a>
+            <a href="#"><i class="bx bx-home"></i> Home</a>
+            <a href="#"><i class="bx bx-book"></i> Shelf</a>
+            <a href="#"><i class="bx bx-note"></i> Notes</a>
+            <a href="#"><i class="bx bx-user"></i> Myself</a>
+            <a href="#"><i class="bx bx-cog"></i> Services</a>
         </nav>
         <form action="#" class="search-bar">
-        <input type="text" placeholder="Search...">
-        <button type="submit" aria-label="Search" title="Search">
-            <i class="bx bx-search" aria-hidden="true"></i>
-        </button>
+            <input type="text" placeholder="Search...">
+            <button type="submit" aria-label="Search" title="Search">
+                <i class="bx bx-search" aria-hidden="true"></i>
+            </button>
         </form>
     </footer>
 </body>
+
 </html>
