@@ -4,6 +4,7 @@ using DG.Tweening;
 public class pileManager : midCardDrop
 {
     [SerializeField] private float boardScale = 1f;
+    [SerializeField] public bool isDrawPile;
     public override void UpdateCardPosition(Card card)
     {
         for (int i = 0; i < currCards.Count; i++)
