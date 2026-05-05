@@ -1,0 +1,416 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #020410;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.container {
+    position: relative;
+    width: 850px;
+    height: 550px;
+    display: flex;
+    /* 让 panel 在内部居中 */
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 12.5%;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    gap: 20px;
+}
+
+.navbar {
+    display: flex;
+    flex: 1;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 16px;
+    color: #e4e4e4;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: #e4e4e4;
+    border-radius: 5px;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.navbar a:hover::after {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.search-bar {
+    width: 250px;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #e4e4e4;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #e4e4e4;
+    padding-left: 10px;
+}
+
+.search-bar input::placeholder {
+    color: #e4e4e4;
+}
+
+.search-bar button {
+    width: 40px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.search-bar button i {
+    font-size: 22px;
+    color: #e4e4e4;
+}
+
+.background {
+    width: 100%;
+    height: 100vh;
+    background: url("Background.png") no-repeat center/cover;
+    filter: blur(10px);
+    position: fixed;
+    z-index: -1;
+}
+
+.background::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 550px;
+    background: url("Background.png") no-repeat center/cover;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.7);
+}
+
+.container .content {
+    width: 58%;
+    padding: 80px;
+    color: #e4e4e4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.text-sci h2 {
+    font-size: 40px;
+    line-height: 1;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.text-sci h2 span {
+    font-size: 25px;
+    color: #ff6b6b;
+    font-style: italic;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.text-sci p {
+    font-size: 16px;
+    margin: 20px 0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.social-icons a i {
+    font-size: 22px;
+    color: #e4e4e4;
+    margin-right: 10px;
+    transition: 0.5s ease;
+}
+
+.social-icons a:hover i {
+    transform: scale(1.2);
+}
+
+.logreg-box {
+    width: 42%;
+    position: relative;
+}
+
+.form-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(20px);
+    background: 0 10px 60px rgba(255, 255, 255, 1.0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: #e4e4e4;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: transform 0.6s ease;
+}
+
+.form-box.login {
+    transform: translateX(0);
+    transition-delay: 0.7s;
+}
+
+.logreg-box.active .form-box.login {
+    transform: translateX(530px);
+    transition-delay: 0s;
+}
+
+.form-box.register {
+    transform: translateX(530px);
+}
+
+.logreg-box.active .form-box.register {
+    transform: translateX(0);
+    transition-delay: 0.7s;
+}
+
+.form-box h2 {
+    font-size: 32px;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 340px;
+    height: 50px;
+    margin: 30px 0;
+    border-bottom: 2px solid #e4e4e4;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #e4e4e4;
+    padding-right: 28px;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+    font-size: 12px;
+    color: #ff6b6b;
+}
+
+.icon {
+    position: absolute;
+    top: 13px;
+    right: 0;
+    font-size: 19px;
+}
+
+.remember-forgot {
+    font-size: 14px;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    margin-right: 4px;
+    accent-color: #e4e4e4;
+}
+
+.remember-forgot a {
+    color: #e4e4e4;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #c4103d;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #e4e4e4;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #a10c30;
+}
+
+.login-register {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.login-register p a {
+    color: #e4e4e4;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+/* ===== 新增：身份选择与学生界面的样式 ===== */
+
+/* 身份选择的大按钮 */
+.role-btn {
+    width: 100%;
+    height: 60px;
+    background: transparent;
+    border: 2px solid #e4e4e4;
+    border-radius: 6px;
+    color: #e4e4e4;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s ease;
+}
+
+.role-btn:hover {
+    background: #e4e4e4;
+    color: #020410;
+}
+
+.role-btn i {
+    font-size: 24px;
+}
+
+.back-btn {
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+    border: none;
+    color: #e4e4e4;
+    cursor: pointer;
+    font-size: 14.5px;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+
+.input-box {
+    border-bottom: 2px solid #333333;
+}
+
+.input-box input {
+    color: #020410;
+    font-weight: 600;
+}
+
+.input-box label {
+    color: #333333;
+    font-weight: 500;
+}
+
+.input-box input::placeholder {
+    color: #555555;
+    font-weight: 500;
+}
+
+.input-box .icon i,
+.input-box i {
+    color: #020410;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    color: #c4103d !important;
+    font-weight: 600;
+}
