@@ -176,7 +176,7 @@ document.getElementById('studentForm').addEventListener('submit', async function
 
       localStorage.setItem('gameDeckStudentId', data.player.session_player_id);
       localStorage.setItem('gameDeckSessionId', data.session.session_id); // 顺便把房间 ID 也存下来，Unity 可能会用
-
+      localStorage.setItem('gameDeckRole', 'Student');
       // alert("Welcome " + nickname + "! Room found. Loading Game...");
 
 
