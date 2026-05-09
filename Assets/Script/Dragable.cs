@@ -6,6 +6,9 @@ public class Dragable : MonoBehaviour
     private Vector3 startDrag;
     public IDropArea colItem = null;
     private bool isDragging = false;
+    [SerializeField] public LayerMask thisLayer;
+    [SerializeField] private LayerMask cardLayer;
+    [SerializeField] private LayerMask pileLayer;
 
     public void StartDragging()
     {
@@ -22,12 +25,15 @@ public class Dragable : MonoBehaviour
 
     public void StopDragging(IDropArea dropAreaFound)
     {
-        colItem = dropAreaFound;
-
-        if (dropAreaFound == null)
+        if (thisLayer == cardLayer)
         {
-            colItem = null;
-            transform.position = startDrag;
+            colItem = dropAreaFound;
+
+            if (dropAreaFound == null)
+            {
+                colItem = null;
+                transform.position = startDrag;
+            }
         }
     }
 

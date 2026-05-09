@@ -128,8 +128,8 @@ SpriteShapeRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1865356271
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -222,10 +222,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::handManager
   currCards: []
+  isFaceUp: 1
   maxHandSize: 5
   cardPrefab: {fileID: 2605247309271434362, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
   splineContainer: {fileID: 4406100416570382480}
   spawnPoint: {fileID: 0}
+  normalScale: 1
+  hoverScale: 1.25
+  hoverLift: 1.2
+  pushDistance: 0.7
 --- !u!1 &5578896559022445834
 GameObject:
   m_ObjectHideFlags: 0

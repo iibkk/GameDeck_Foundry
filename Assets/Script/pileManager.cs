@@ -9,6 +9,7 @@ public class pileManager : midCardDrop
     {
         for (int i = 0; i < currCards.Count; i++)
         {
+            if (currCards[i] == null) { return; }
             currCards[i].transform.DOKill();                                // stop any previous tween on this card
 
             Vector3 pos = transform.position;
@@ -17,6 +18,7 @@ public class pileManager : midCardDrop
             currCards[i].transform.DOMove(pos, 0.2f);                           // move card to board position
             currCards[i].transform.DORotate(Vector3.zero, 0.2f);                // reset rotation to normal
             currCards[i].transform.DOScale(Vector3.one * boardScale, 0.2f);     // reset size for board
+            
 
             CardDisplay display = currCards[i].GetComponent<CardDisplay>();
             if (display != null)

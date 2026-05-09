@@ -15,7 +15,7 @@ TagManager:
   - Pile
   - Hand
   - Card
-  - 
+  - Background
   - 
   - 
   - 
@@ -40,6 +40,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2877625803
+    locked: 0
+  - name: Sprites
+    uniqueID: 1865356271
     locked: 0
   m_RenderingLayers:
   - Default

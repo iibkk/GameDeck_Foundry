@@ -118,8 +118,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 452
-        height: 452
+        width: 278
+        height: 342
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,6 +130,28 @@ TextureImporter:
       bones: []
       spriteID: 3a63cfcea7ce25770800000000000000
       internalID: 8598194651309815459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grey_square copy_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 240
+        width: 29
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 403009a35e2c4d346afa1449f0c1b1e5
+      internalID: -676833808
       vertices: []
       indices: 
       edges: []
@@ -149,6 +171,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       grey_square copy_0: 8598194651309815459
+      grey_square copy_1: -676833808
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

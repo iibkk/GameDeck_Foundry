@@ -7,6 +7,7 @@ public class dragManager : MonoBehaviour
 {
     [SerializeField] private LayerMask cardLayer;
     [SerializeField] private LayerMask pileLayer;
+    [SerializeField] public GameManagerScript gameManager;
 
     private Dragable currDragObj = null;
     private Collider2D currCol = null;
@@ -54,6 +55,15 @@ public class dragManager : MonoBehaviour
 
         // Card drag
         Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos, cardLayer);
+
+        if (hit == null && gameManager.editMode)
+        {
+            hit = Physics2D.OverlapPoint(mouseWorldPos, pileLayer);
+            if (hit.TryGetComponent(out midCardDrop pile))
+            {
+                gameManager.selectedPile = pile;
+            }
+        }
 
         if (hit != null && hit.TryGetComponent(out Dragable obj))
         {
