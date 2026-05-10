@@ -39,23 +39,15 @@ public class handManager : midCardDrop
             DrawCard();
         }
     }
-
-
+    public void AddCard(Card card)
+    {
+        currCards.Add(card);
+        card.currPile = this;
+        UpdateCardPosition(card);
+    }
     private void DrawCard()
     {
-        if (currCards.Count >= maxHandSize) return;
-
-        Card g = Instantiate(cardPrefab, spawnPoint.position, Quaternion.identity, transform);
-
-        int randomValue = Random.Range(1, 14);
-
-        CardDisplay display = g.GetComponent<CardDisplay>();
-        if (display != null)
-        {
-            display.SetCardValue(randomValue);
-        }
-
-        AddCard(g);
+        Debug.Log("Use DrawCardUI button to draw from backend deck.");
     }
     public void SetHoveredCard(Card card)
     {
@@ -70,6 +62,20 @@ public class handManager : midCardDrop
             hoveredCard = null;
             UpdateCardPosition(null);
         }
+    }
+    public void CreateCardFromData(DrawCardUI.CardData data)
+    {
+        if (currCards.Count >= maxHandSize) return;
+
+        Card g = Instantiate(cardPrefab, spawnPoint.position, Quaternion.identity, transform);
+
+        CardDisplay display = g.GetComponent<CardDisplay>();
+        if (display != null)
+        {
+            display.SetCardInfo(data.card_name, data.card_text);
+        }
+
+        AddCard(g);
     }
 
 

@@ -12,7 +12,7 @@ public class AddCardUI : MonoBehaviour
     public TMP_InputField descriptionInput;
     public TMP_InputField frontImageUrlInput;
     public TMP_InputField backImageUrlInput;
-
+    public DeckViewerUI deckViewer;
     public string baseUrl = "http://localhost:3000";
 
     public void AddCard()
@@ -22,11 +22,17 @@ public class AddCardUI : MonoBehaviour
 
     IEnumerator AddCardRequest()
     {
+        if (!int.TryParse(deckIdInput.text, out int deckId))
+        {
+            Debug.LogError("Deck ID must be a number.");
+            yield break;
+        }
+
         string token = PlayerPrefs.GetString("teacherToken");
 
         CardData card = new CardData
         {
-            deck_id = int.Parse(deckIdInput.text),
+            deck_id = deckId,
             card_name = cardNameInput.text,
             card_text = cardTextInput.text,
             description = descriptionInput.text,
@@ -52,9 +58,42 @@ public class AddCardUI : MonoBehaviour
         else
         {
             Debug.Log("Card added: " + request.downloadHandler.text);
+
+            if (deckViewer != null)
+            {
+                deckViewer.LoadCardsFromDeck(deckId);
+            }
+        }
+        if (cardNameInput.text.Length > 30)
+        {
+            Debug.LogError("Card name too long. Max 30 characters.");
+            yield break;
+        }
+
+        if (cardTextInput.text.Length > 80)
+        {
+            Debug.LogError("Card text too long. Max 80 characters.");
+            yield break;
+        }
+
+        if (descriptionInput.text.Length > 120)
+        {
+            Debug.LogError("Description too long. Max 120 characters.");
+            yield break;
+        }
+
+        if (string.IsNullOrWhiteSpace(frontImageUrlInput.text))
+        {
+            Debug.LogError("Front image is required.");
+            yield break;
+        }
+
+        if (string.IsNullOrWhiteSpace(backImageUrlInput.text))
+        {
+            Debug.LogError("Back image is required.");
+            yield break;
         }
     }
-
     [System.Serializable]
     public class CardData
     {

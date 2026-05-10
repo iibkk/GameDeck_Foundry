@@ -49,5 +49,21 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to get cards' });
   }
 });
+//delete card in deck
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await pool.query(
+      'DELETE FROM cards WHERE id = $1',
+      [id]
+    );
+
+    res.json({ message: 'Card deleted' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete card' });
+  }
+});
 
 export default router;

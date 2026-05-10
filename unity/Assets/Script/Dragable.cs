@@ -22,6 +22,7 @@ public class Dragable : MonoBehaviour
 
     public void StopDragging(IDropArea dropAreaFound)
     {
+        isDragging = false;
         colItem = dropAreaFound;
 
         if (dropAreaFound == null)
@@ -30,7 +31,6 @@ public class Dragable : MonoBehaviour
             transform.position = startDrag;
         }
     }
-
     /*
     public void DragWithMouse()
     {

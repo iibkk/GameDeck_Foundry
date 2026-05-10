@@ -3,35 +3,36 @@ using UnityEngine;
 
 public class CardDisplay : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro numberText;
+    public TMP_Text cardNameText;
+    public TMP_Text cardText;
 
+    public void SetCardInfo(string name, string text)
+    {
+        if (cardNameText != null)
+            cardNameText.text = name;
+
+        if (cardText != null)
+            cardText.text = text;
+    }
+
+    // Keep this because handManager still calls SetCardValue(randomValue)
     public void SetCardValue(int value)
     {
-        if (numberText != null)
-        {
-            numberText.text = value.ToString();
-        }
+        SetCardInfo("Card " + value, "Value: " + value);
     }
+
     public void SetSortingOrder(int order)
     {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        if (sr != null)
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer r in renderers)
         {
-            sr.sortingOrder = order;
+            r.sortingOrder = order;
         }
 
-        MeshRenderer mr = numberText.GetComponent<MeshRenderer>();
-        if (mr != null)
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer mr in meshRenderers)
         {
             mr.sortingOrder = order + 1;
-        }
-    }
-
-    private void LateUpdate()
-    {
-        if (numberText != null)
-        {
-            numberText.transform.rotation = Quaternion.identity;
         }
     }
 }
