@@ -15,7 +15,7 @@ public class pileManager : midCardDrop
 
             currCards[i].transform.DOMove(pos, 0.2f);                           // move card to board position
             currCards[i].transform.DORotate(Vector3.zero, 0.2f);                // reset rotation to normal
-            currCards[i].transform.DOScale(Vector3.one * boardScale, 0.2f);     // reset size for board
+            currCards[i].transform.DOScale(Vector3.one, 0.2f);     // reset size for board
 
             CardDisplay display = currCards[i].GetComponent<CardDisplay>();
             if (display != null)
@@ -23,5 +23,19 @@ public class pileManager : midCardDrop
                 display.SetSortingOrder(i * 2);                             // control which card draws on top
             }
         }
+    }
+    public void ShufflePile()
+    {
+        for (int i = 0; i < currCards.Count; i++)
+        {
+            int randomIndex = Random.Range(i, currCards.Count);
+
+            Card temp = currCards[i];
+            currCards[i] = currCards[randomIndex];
+            currCards[randomIndex] = temp;
+        }
+
+        UpdateCardPosition(null);
+        Debug.Log("Pile shuffled");
     }
 }

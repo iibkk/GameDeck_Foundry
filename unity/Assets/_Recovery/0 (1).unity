@@ -595,8 +595,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 564758596}
-        m_TargetAssemblyTypeName: BoardEditorManager, Assembly-CSharp
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
         m_MethodName: ToggleHand
         m_Mode: 1
         m_Arguments:
@@ -645,37 +645,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60543603}
   m_CullTransparentMesh: 1
---- !u!1 &83414247
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 83414248}
-  m_Layer: 0
-  m_Name: DeckReturnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &83414248
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83414247}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.04, y: 6.94, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172466586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,37 +1360,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &326636694
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 326636695}
-  m_Layer: 0
-  m_Name: PileSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &326636695
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326636694}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.26, y: 0.88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &353462126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1386,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353462126}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1505,9 +1443,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 564758596}
-        m_TargetAssemblyTypeName: BoardEditorManager, Assembly-CSharp
-        m_MethodName: AddPile
+      - m_Target: {fileID: 469129927}
+        m_TargetAssemblyTypeName: objSpawner, Assembly-CSharp
+        m_MethodName: SpawnPile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1904,9 +1842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6f63fb34871466d9b991d8e41ca377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::objSpawner
-  pilePrefab: {fileID: 5785776810826051908, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
+  pilePrefab: {fileID: 1837081769}
   spawnPoint: {fileID: 469129928}
-  boardEditor: {fileID: 564758596}
 --- !u!4 &469129928
 Transform:
   m_ObjectHideFlags: 0
@@ -1916,7 +1853,7 @@ Transform:
   m_GameObject: {fileID: 469129926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 941, y: 689.2531, z: 0}
+  m_LocalPosition: {x: 126.41468, y: 689.2531, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2208,6 +2145,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2333,56 +2271,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &564758595
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 564758597}
-  - component: {fileID: 564758596}
-  m_Layer: 0
-  m_Name: BoardEditorManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &564758596
+--- !u!114 &519420033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564758595}
+  m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57022209b4974daa8a158f05415b93e, type: 3}
+  m_Script: {fileID: 11500000, guid: 83826f23f3ea04620895bd1e7fcf2b01, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoardEditorManager
+  m_EditorClassIdentifier: Assembly-CSharp::GameManagerScript
   editMode: 0
-  boardEditorPanel: {fileID: 2133209505}
-  handBar: {fileID: 1018695071}
-  pilePrefab: {fileID: 5785776810826051908, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-  spawnPoint: {fileID: 326636695}
-  deckReturnPoint: {fileID: 83414248}
---- !u!4 &564758597
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564758595}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.72329, y: -0.10482, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  isHand: 1
+  selectedPile: {fileID: 0}
+  cam: {fileID: 519420031}
+  hand: {fileID: 1018695071}
+  editorPanel: {fileID: 2133209505}
+  editButton: {fileID: 694093736}
 --- !u!1 &572286990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,7 +2573,6 @@ GameObject:
   m_Component:
   - component: {fileID: 664720410}
   - component: {fileID: 664720411}
-  - component: {fileID: 664720412}
   m_Layer: 0
   m_Name: CardSpawn
   m_TagString: Untagged
@@ -2683,7 +2589,7 @@ Transform:
   m_GameObject: {fileID: 664720409}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.86, y: 4.92, z: 0}
+  m_LocalPosition: {x: 8.15, y: 4.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2701,21 +2607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6f63fb34871466d9b991d8e41ca377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::objSpawner
-  pilePrefab: {fileID: 5785776810826051908, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
+  pilePrefab: {fileID: 1837081769}
   spawnPoint: {fileID: 664720410}
-  boardEditor: {fileID: 564758596}
---- !u!114 &664720412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664720409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 418da487bbd2a5747b5f1d0a19cce3cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dragable
 --- !u!1 &670192748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,9 +2724,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 564758596}
-        m_TargetAssemblyTypeName: BoardEditorManager, Assembly-CSharp
-        m_MethodName: ToggleEditMode
+      - m_Target: {fileID: 1578919074}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
+        m_MethodName: ChangeMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2898,7 +2791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -448.54004, y: 509.45215}
+  m_AnchoredPosition: {x: -462, y: 510}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &772816602
@@ -3447,8 +3340,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 564758596}
-        m_TargetAssemblyTypeName: BoardEditorManager, Assembly-CSharp
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
         m_MethodName: FlipCards
         m_Mode: 1
         m_Arguments:
@@ -4004,32 +3897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2830261a39e40149f08aa8149ed5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::handManager
---- !u!114 &1018695077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018695071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9169344d7d2c4b519f0f46f3a660595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoardObjectDraggable
-  boardEditor: {fileID: 564758596}
---- !u!114 &1018695078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018695071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1440799d672fa419ca9cb0333320fb2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SelectablePile
-  boardEditor: {fileID: 564758596}
 --- !u!1 &1029307839
 GameObject:
   m_ObjectHideFlags: 0
@@ -4545,9 +4412,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 564758596}
-        m_TargetAssemblyTypeName: BoardEditorManager, Assembly-CSharp
-        m_MethodName: RemoveSelectedPile
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
+        m_MethodName: RemovePile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4796,7 +4663,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1763014460331064234, guid: 1a60d2de3b8e4412095e0f15ac607194, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5711,8 +5578,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 564758596}
-        m_TargetAssemblyTypeName: BoardEditorManager, Assembly-CSharp
+      - m_Target: {fileID: 1578919074}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
         m_MethodName: ShuffleSelectedPile
         m_Mode: 1
         m_Arguments:
@@ -7799,17 +7666,17 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 353462127}
   - {fileID: 1214795910}
   - {fileID: 60543604}
   - {fileID: 907810215}
   - {fileID: 1521162836}
-  - {fileID: 353462127}
   m_Father: {fileID: 2140881670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -328, y: 361}
-  m_SizeDelta: {x: -1499.1, y: -816.25415}
+  m_AnchoredPosition: {x: -332, y: 407}
+  m_SizeDelta: {x: -1499.1, y: -816.1271}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2133209507
 MonoBehaviour:
@@ -7943,7 +7810,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 694093739}
   - {fileID: 2133209506}
   - {fileID: 1507376446}
   - {fileID: 1877664421}
@@ -7951,6 +7817,7 @@ RectTransform:
   - {fileID: 1747532816}
   - {fileID: 1889521785}
   - {fileID: 964589452}
+  - {fileID: 694093739}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7966,49 +7833,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2527224537293381985, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: boardEditor
-      value: 
-      objectReference: {fileID: 564758596}
-    - target: {fileID: 3248680481269655701, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_Size.x
-      value: 3.0972462
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248680481269655701, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_Size.y
-      value: 4.0169096
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248680481269655701, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248680481269655701, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.03171277
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248680481269655701, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.015856206
-      objectReference: {fileID: 0}
-    - target: {fileID: 3562441498423957344, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: boardEditor
-      value: 
-      objectReference: {fileID: 564758596}
-    - target: {fileID: 4649068951744975010, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4649068951744975010, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 5557933745915604116, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5557933745915604116, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2306
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5557933745915604116, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8042,17 +7873,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5785776810826051908, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: boardScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6916869188185309398, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
       propertyPath: m_Name
       value: cardDrop
-      objectReference: {fileID: 0}
-    - target: {fileID: 6916869188185309398, guid: fb5ce4f07f4222b47ba7a2d9fb5188ee, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8246,7 +8069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1064347943854925608, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 10
+      value: 6.36
       objectReference: {fileID: 0}
     - target: {fileID: 1064347943854925608, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8399,20 +8222,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7802541251241725192, guid: a49dcec7ffaf4bc4c882514cedc49a7b, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2246534564602621954, guid: a49dcec7ffaf4bc4c882514cedc49a7b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1018695077}
-    - targetCorrespondingSourceObject: {fileID: 2246534564602621954, guid: a49dcec7ffaf4bc4c882514cedc49a7b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1018695078}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a49dcec7ffaf4bc4c882514cedc49a7b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -8438,6 +8251,3 @@ SceneRoots:
   - {fileID: 1965950930}
   - {fileID: 1578919075}
   - {fileID: 469129928}
-  - {fileID: 83414248}
-  - {fileID: 564758597}
-  - {fileID: 326636695}

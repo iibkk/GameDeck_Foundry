@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4649068951744975010}
   - component: {fileID: 3248680481269655701}
   - component: {fileID: 5785776810826051908}
+  - component: {fileID: 3562441498423957344}
+  - component: {fileID: 2527224537293381985}
   m_Layer: 7
   m_Name: cardDrop
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.602, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -151,4 +153,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77561431ae78cd549816acb45773f12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::pileManager
+  isFaceUp: 0
   currCards: []
+  boardScale: 1
+--- !u!114 &3562441498423957344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6916869188185309398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9169344d7d2c4b519f0f46f3a660595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoardObjectDraggable
+  boardEditor: {fileID: 0}
+--- !u!114 &2527224537293381985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6916869188185309398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1440799d672fa419ca9cb0333320fb2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectablePile
+  boardEditor: {fileID: 0}

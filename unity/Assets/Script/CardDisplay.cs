@@ -35,4 +35,8 @@ public class CardDisplay : MonoBehaviour
             mr.sortingOrder = order + 1;
         }
     }
+    public string GetCardName()
+    {
+        return cardNameText != null ? cardNameText.text : "card";
+    }
 }

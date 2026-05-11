@@ -9,6 +9,14 @@ namespace Composition
         public midCardDrop currPile;
         private handManager cachedHand;
 
+        public void SetFaceUp(bool value)
+        {
+            isFaceUp = value;
+            transform.rotation = value
+                ? Quaternion.identity
+                : Quaternion.Euler(0, 180, 0);
+        }
+
         public void DropCard(IDropArea cardDropArea)
         {
             cardDropArea.dropArea(this);
@@ -23,4 +31,5 @@ namespace Composition
             }
         }
     }
+
 }

@@ -41,9 +41,23 @@ public class handManager : midCardDrop
     }
     public void AddCard(Card card)
     {
+        bool wasFromPile = card.currPile != null && !(card.currPile is handManager);
+
         currCards.Add(card);
         card.currPile = this;
         UpdateCardPosition(card);
+
+        if (wasFromPile)
+        {
+            CardDisplay display = card.GetComponent<CardDisplay>();
+            string cardName = display != null ? display.GetCardName() : "card";
+            string playerName = PlayerPrefs.GetString("playerName", "User");
+
+            if (announcementUI != null)
+            {
+                announcementUI.Show(playerName + " has withdrawn " + cardName);
+            }
+        }
     }
     private void DrawCard()
     {

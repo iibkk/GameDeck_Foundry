@@ -6,17 +6,30 @@ using UnityEngine.Splines;
 public class midCardDrop : MonoBehaviour, IDropArea
 {
 
-    public List<Card> currCards = new();
-    
-    
+    [SerializeField] public bool isFaceUp = false;
+    public List<Card> currCards = new List<Card>();
+    public AnnouncementUI announcementUI;
+
+
     public void dropArea(Card card)
     {
+        string playerName = PlayerPrefs.GetString("playerName", "User");
+
         if (card.currPile)
         {
             card.currPile.RemoveCard(card);
         }
-        card.transform.SetParent(transform);
+
+        card.transform.SetParent(null, true);
         AddCard(card);
+
+        CardDisplay display = card.GetComponent<CardDisplay>();
+        string cardName = display != null ? display.GetCardName() : "card";
+
+        if (announcementUI != null)
+        {
+            announcementUI.Show(playerName + " have played " + cardName);
+        }
 
         Debug.Log("Card Drop here");
     }

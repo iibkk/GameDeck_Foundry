@@ -10,6 +10,8 @@ public class DeckViewerUI : MonoBehaviour
     public Transform deckViewerParent;
     public GameObject deckCardPrefab;
     public TMP_InputField deckIdInput;
+    
+    
 
     public void LoadDeckButton()
     {
