@@ -62,6 +62,7 @@ wss.on('connection', (ws) => {
         player_name: data.player_name,
         card_name: data.card_name,
         card_text: data.card_text,
+        client_id: data.client_id,
         card_id: data.card_id
       });
     }
@@ -72,6 +73,7 @@ wss.on('connection', (ws) => {
         type: 'withdraw_card',
         player_name: data.player_name,
         card_name: data.card_name,
+        client_id: data.client_id,
         card_id: data.card_id
       });
     }

@@ -40,34 +40,38 @@ public class handManager : midCardDrop
         }
     }
     public override void AddCard(Card card)
-{
-    midCardDrop previousPile = card.currPile;
-
-    currCards.Add(card);
-
-    card.currPile = this;
-
-    UpdateCardPosition(card);
-
-    if (previousPile is pileManager)
     {
-        CardDisplay display = card.GetComponent<CardDisplay>();
+        midCardDrop previousPile = card.currPile;
 
-        string cardName = "card";
+        currCards.Add(card);
 
-        if (display != null)
+        card.currPile = this;
+
+        UpdateCardPosition(card);
+
+        if (previousPile is pileManager)
         {
-            cardName = display.GetCardName();
-        }
+            CardDisplay display = card.GetComponent<CardDisplay>();
 
-        string playerName = PlayerPrefs.GetString("playerName", "User");
+            string cardName = "card";
 
-        if (announcementUI != null)
-        {
-            announcementUI.Show(playerName + " has withdrawn " + cardName);
+            if (display != null)
+            {
+                cardName = display.GetCardName();
+            }
+
+            string playerName = PlayerPrefs.GetString("playerName", "User");
+
+            //if (announcementUI != null)
+            //{
+            //    announcementUI.Show(playerName + " has withdrawn " + cardName);
+            //}
+            if (multiplayer != null)
+            {
+                multiplayer.SendWithdrawCard(cardName, card.GetInstanceID());
+            }
         }
     }
-}
     private void DrawCard()
     {
         Debug.Log("Use DrawCardUI button to draw from backend deck.");

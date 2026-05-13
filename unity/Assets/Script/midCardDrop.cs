@@ -9,6 +9,7 @@ public class midCardDrop : MonoBehaviour, IDropArea
     [SerializeField] public bool isFaceUp = false;
     public List<Card> currCards = new List<Card>();
     public AnnouncementUI announcementUI;
+    public MultiplayerWebSocket multiplayer;
 
 
     public void dropArea(Card card)
@@ -28,9 +29,18 @@ public class midCardDrop : MonoBehaviour, IDropArea
             CardDisplay display = card.GetComponent<CardDisplay>();
             string cardName = display != null ? display.GetCardName() : "card";
 
-            if (announcementUI != null)
+            //    if (announcementUI != null)
+            //    {
+            //        announcementUI.Show(playerName + " has played " + cardName);
+            //    }
+
+            if (multiplayer != null)
             {
-                announcementUI.Show(playerName + " has played " + cardName);
+                string cardText = display != null && display.cardText != null
+        ? display.cardText.text
+        : "";
+
+                multiplayer.SendPlayCard(cardName, cardText, card.GetInstanceID());
             }
         }
 

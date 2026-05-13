@@ -13,14 +13,18 @@ public class MultiplayerWebSocket : MonoBehaviour
     private WebSocket websocket;
     private int sessionId;
     private string playerName;
+    private string clientId;
     private Dictionary<int, Card> playedCards = new Dictionary<int, Card>();
+
+
 
     async void Start()
     {
+        clientId = System.Guid.NewGuid().ToString();
         sessionId = PlayerPrefs.GetInt("sessionId", 1);
         playerName = PlayerPrefs.GetString("playerName", "User");
 
-        websocket = new WebSocket("ws://localhost:3000");
+        websocket = new WebSocket("ws://127.0.0.1:3000");
 
         websocket.OnOpen += () =>
         {
@@ -43,15 +47,23 @@ public class MultiplayerWebSocket : MonoBehaviour
 
             if (msg.type == "play_card")
             {
-                announcementUI.Show(msg.player_name + " has played " + msg.card_name);
+                if (msg.client_id == clientId)
+                {
+                    return;
+                }
 
+                announcementUI.Show(msg.player_name + " has played " + msg.card_name);
                 SpawnCardInPlayZone(msg);
             }
 
             if (msg.type == "withdraw_card")
             {
-                announcementUI.Show(msg.player_name + " has withdrawn " + msg.card_name);
+                if (msg.client_id == clientId)
+                {
+                    return;
+                }
 
+                announcementUI.Show(msg.player_name + " has withdrawn " + msg.card_name);
                 RemoveCardFromPlayZone(msg.card_id);
             }
         };
@@ -90,6 +102,12 @@ public class MultiplayerWebSocket : MonoBehaviour
 
     public async void SendPlayCard(string cardName, string cardText, int cardId)
     {
+        if (websocket == null || websocket.State != WebSocketState.Open)
+        {
+            Debug.LogError("Cannot send play_card: WebSocket not connected");
+            return;
+        }
+
         WebSocketMessage msg = new WebSocketMessage
         {
             type = "play_card",
@@ -97,7 +115,9 @@ public class MultiplayerWebSocket : MonoBehaviour
             player_name = playerName,
             card_name = cardName,
             card_text = cardText,
+            client_id = clientId,
             card_id = cardId
+
         };
 
         await websocket.SendText(JsonUtility.ToJson(msg));
@@ -105,12 +125,19 @@ public class MultiplayerWebSocket : MonoBehaviour
 
     public async void SendWithdrawCard(string cardName, int cardId)
     {
+        if (websocket == null || websocket.State != WebSocketState.Open)
+        {
+            Debug.LogError("Cannot send withdraw_card: WebSocket not connected");
+            return;
+        }
+
         WebSocketMessage msg = new WebSocketMessage
         {
             type = "withdraw_card",
             session_id = sessionId,
             player_name = playerName,
             card_name = cardName,
+            client_id = clientId,
             card_id = cardId
         };
 
@@ -168,6 +195,7 @@ public class MultiplayerWebSocket : MonoBehaviour
         public string player_name;
         public string message;
         public int card_id;
+        public string client_id;
         public string card_name;
         public string card_text;
     }
