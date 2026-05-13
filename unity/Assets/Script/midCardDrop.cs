@@ -23,12 +23,15 @@ public class midCardDrop : MonoBehaviour, IDropArea
         card.transform.SetParent(null, true);
         AddCard(card);
 
-        CardDisplay display = card.GetComponent<CardDisplay>();
-        string cardName = display != null ? display.GetCardName() : "card";
-
-        if (announcementUI != null)
+        if (!(this is handManager))
         {
-            announcementUI.Show(playerName + " have played " + cardName);
+            CardDisplay display = card.GetComponent<CardDisplay>();
+            string cardName = display != null ? display.GetCardName() : "card";
+
+            if (announcementUI != null)
+            {
+                announcementUI.Show(playerName + " has played " + cardName);
+            }
         }
 
         Debug.Log("Card Drop here");
@@ -45,7 +48,7 @@ public class midCardDrop : MonoBehaviour, IDropArea
     }
 
 
-    public void AddCard(Card card)
+    public virtual void AddCard(Card card)
     {
         card.currPile = this;
         currCards.Add(card);

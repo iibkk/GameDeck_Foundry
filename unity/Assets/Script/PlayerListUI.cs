@@ -9,12 +9,6 @@ public class PlayerListUI : MonoBehaviour
 
     private readonly List<GameObject> playerItems = new();
 
-
-    void Start()                                    //TEST
-    {
-        SetPlayers(new List<string> { "Hao", "Alex", "Jenny", "Tom" });
-    }
-
     public void SetPlayers(List<string> playerNames)
     {
         foreach (GameObject item in playerItems)

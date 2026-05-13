@@ -1,11 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import http from 'http';
+import { WebSocketServer } from 'ws';
 
 import authRoutes from './routes/auth.js';
 import sessionRoutes from './routes/session.js';
 import cardRoutes from './routes/card.js';
-import deckRoutes from './routes/deck.js';
 import gameRoutes from './routes/game.js';
 
 dotenv.config();
@@ -18,15 +19,88 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/session', sessionRoutes);
 app.use('/api/cards', cardRoutes);
-app.use('/api/decks', deckRoutes);
 app.use('/api/game', gameRoutes);
 
 app.get('/', (req, res) => {
   res.send('GameDeck Backend Running');
 });
 
+const server = http.createServer(app);
+
+const wss = new WebSocketServer({ server });
+
+const rooms = new Map();
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+
+  ws.on('message', (message) => {
+    const data = JSON.parse(message.toString());
+
+    console.log('WS Message:', data);
+
+    // JOIN ROOM
+    if (data.type === 'join_room') {
+      ws.session_id = data.session_id;
+
+      if (!rooms.has(data.session_id)) {
+        rooms.set(data.session_id, new Set());
+      }
+
+      rooms.get(data.session_id).add(ws);
+
+      broadcast(data.session_id, {
+        type: 'announcement',
+        message: `${data.player_name} joined the game`
+      });
+    }
+
+    // PLAY CARD
+    if (data.type === 'play_card') {
+      broadcast(data.session_id, {
+        type: 'play_card',
+        player_name: data.player_name,
+        card_name: data.card_name,
+        card_text: data.card_text,
+        card_id: data.card_id
+      });
+    }
+
+    // WITHDRAW CARD
+    if (data.type === 'withdraw_card') {
+      broadcast(data.session_id, {
+        type: 'withdraw_card',
+        player_name: data.player_name,
+        card_name: data.card_name,
+        card_id: data.card_id
+      });
+    }
+  });
+
+  ws.on('close', () => {
+    console.log('Client disconnected');
+
+    if (ws.session_id && rooms.has(ws.session_id)) {
+      rooms.get(ws.session_id).delete(ws);
+    }
+  });
+});
+
+
+function broadcast(sessionId, data) {
+  const clients = rooms.get(sessionId);
+
+  if (!clients) return;
+
+  clients.forEach((client) => {
+    if (client.readyState === 1) {
+      client.send(JSON.stringify(data));
+    }
+  });
+}
+
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
