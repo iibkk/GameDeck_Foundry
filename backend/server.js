@@ -55,7 +55,6 @@ wss.on('connection', (ws) => {
       });
     }
 
-    // PLAY CARD
     if (data.type === 'play_card') {
       broadcast(data.session_id, {
         type: 'play_card',
@@ -63,7 +62,17 @@ wss.on('connection', (ws) => {
         card_name: data.card_name,
         card_text: data.card_text,
         client_id: data.client_id,
-        card_id: data.card_id
+        card_id: data.card_id,
+        pile_id: data.pile_id
+      });
+    }
+
+    // REMOVE PILE
+    if (data.type === "remove_pile") {
+      broadcast(data.session_id, {
+        type: "remove_pile",
+        client_id: data.client_id,
+        pile_id: data.pile_id
       });
     }
 
@@ -75,6 +84,28 @@ wss.on('connection', (ws) => {
         card_name: data.card_name,
         client_id: data.client_id,
         card_id: data.card_id
+      });
+    }
+    if (data.type === "create_pile") {
+      console.log("Broadcast create_pile:", data);
+
+      broadcast(data.session_id, {
+        type: "create_pile",
+        client_id: data.client_id,
+        pile_id: data.pile_id,
+        x: data.x,
+        y: data.y
+      });
+    }
+    if (data.type === "move_pile") {
+      console.log("Broadcast move_pile:", data);
+
+      broadcast(data.session_id, {
+        type: "move_pile",
+        client_id: data.client_id,
+        pile_id: data.pile_id,
+        x: data.x,
+        y: data.y
       });
     }
   });

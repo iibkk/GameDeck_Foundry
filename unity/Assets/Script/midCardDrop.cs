@@ -10,6 +10,7 @@ public class midCardDrop : MonoBehaviour, IDropArea
     public List<Card> currCards = new List<Card>();
     public AnnouncementUI announcementUI;
     public MultiplayerWebSocket multiplayer;
+    private HashSet<int> sentCards = new HashSet<int>();
 
 
     public void dropArea(Card card)
@@ -40,11 +41,11 @@ public class midCardDrop : MonoBehaviour, IDropArea
         ? display.cardText.text
         : "";
 
-                multiplayer.SendPlayCard(cardName, cardText, card.GetInstanceID());
+                multiplayer.SendPlayCard(cardName, cardText, card.GetInstanceID(), gameObject.name);
             }
         }
-
-        Debug.Log("Card Drop here");
+        
+        Debug.Log("Card Drop here");        
     }
 
 

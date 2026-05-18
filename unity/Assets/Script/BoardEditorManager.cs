@@ -13,6 +13,9 @@ public class BoardEditorManager : MonoBehaviour
 
     private midCardDrop selectedPile;
     public GameObject boardEditButton;
+    public MultiplayerWebSocket multiplayer;
+    private int pileCounter = 0;
+
 
 
     void Start()
@@ -25,6 +28,10 @@ public class BoardEditorManager : MonoBehaviour
         boardEditButton.SetActive(isTeacher);
         boardEditorPanel.SetActive(false);
     }
+    bool IsTeacher()
+    {
+        return PlayerPrefs.GetString("role", "student") == "teacher";
+    }
 
     public void ToggleEditMode()
     {
@@ -34,13 +41,37 @@ public class BoardEditorManager : MonoBehaviour
 
     public void AddPile()
     {
-        pileManager newPile = Instantiate(pilePrefab, spawnPoint.position, Quaternion.identity);
+        if (!IsTeacher()) return;
 
-        BoardObjectDraggable drag = newPile.GetComponent<BoardObjectDraggable>();
-        if (drag != null) drag.boardEditor = this;
+        pileManager newPile =
+            Instantiate(pilePrefab, spawnPoint.position, Quaternion.identity);
 
-        SelectablePile select = newPile.GetComponent<SelectablePile>();
-        if (select != null) select.boardEditor = this;
+        newPile.gameObject.name = "Pile_" + pileCounter;
+        pileCounter++;
+
+        BoardObjectDraggable drag =
+            newPile.GetComponent<BoardObjectDraggable>();
+
+        if (drag != null)
+            drag.boardEditor = this;
+
+        SelectablePile select =
+            newPile.GetComponent<SelectablePile>();
+
+        if (select != null)
+            select.boardEditor = this;
+
+        if (multiplayer != null)
+        {
+            multiplayer.SendCreatePile(
+                newPile.gameObject.name,
+                newPile.transform.position
+            );
+        }
+        else
+        {
+            Debug.LogError("Multiplayer is not assigned in BoardEditorManager");
+        }
     }
 
     public void SelectPile(midCardDrop pile)
@@ -51,18 +82,61 @@ public class BoardEditorManager : MonoBehaviour
 
     public void RemoveSelectedPile()
     {
+        if (!IsTeacher()) return;
         if (selectedPile == null) return;
+
+        string pileId = selectedPile.gameObject.name;
+
+        if (multiplayer != null)
+        {
+            multiplayer.SendRemovePile(pileId);
+        }
 
         Destroy(selectedPile.gameObject);
         selectedPile = null;
     }
+    public void RemoveRemotePile(string pileId)
+    {
+        GameObject pile = GameObject.Find(pileId);
+
+        if (pile != null)
+        {
+            Destroy(pile);
+        }
+    }
 
     public void ToggleHand()
     {
+        if (!IsTeacher()) return;
         handBar.SetActive(!handBar.activeSelf);
+    }
+    public void CreateRemotePile(string pileId, Vector3 position)
+    {
+        GameObject existing = GameObject.Find(pileId);
+
+        if (existing != null)
+            return;
+
+        pileManager newPile =
+            Instantiate(pilePrefab, position, Quaternion.identity);
+
+        newPile.gameObject.name = pileId;
+
+        BoardObjectDraggable drag =
+            newPile.GetComponent<BoardObjectDraggable>();
+
+        if (drag != null)
+            drag.boardEditor = this;
+
+        SelectablePile select =
+            newPile.GetComponent<SelectablePile>();
+
+        if (select != null)
+            select.boardEditor = this;
     }
     public void ShuffleSelectedPile()
     {
+        if (!IsTeacher()) return;
         if (selectedPile == null)
         {
             Debug.LogError("No pile selected");
@@ -88,6 +162,7 @@ public class BoardEditorManager : MonoBehaviour
     private bool cardsFaceUp = true;
     public void FlipCards()
     {
+        if (!IsTeacher()) return;
         cardsFaceUp = !cardsFaceUp;
 
         Composition.Card[] allCards = FindObjectsByType<Composition.Card>(FindObjectsSortMode.None);
@@ -97,5 +172,13 @@ public class BoardEditorManager : MonoBehaviour
             card.SetFaceUp(cardsFaceUp);
         }
     }
+    public void ApplyMovePile(string pileId, Vector3 position)
+    {
+        GameObject pile = GameObject.Find(pileId);
 
+        if (pile != null)
+        {
+            pile.transform.position = position;
+        }
+    }
 }

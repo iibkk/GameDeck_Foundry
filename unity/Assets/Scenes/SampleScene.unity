@@ -2582,6 +2582,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 326636695}
   deckReturnPoint: {fileID: 83414248}
   boardEditButton: {fileID: 694093735}
+  multiplayer: {fileID: 1170948576}
 --- !u!4 &564758597
 Transform:
   m_ObjectHideFlags: 0
@@ -4571,6 +4572,7 @@ MonoBehaviour:
   announcementUI: {fileID: 205114141}
   cardPrefab: {fileID: 2558309233127548092, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
   playZonePoint: {fileID: 25867092}
+  boardEditor: {fileID: 564758596}
 --- !u!4 &1170948577
 Transform:
   m_ObjectHideFlags: 0
@@ -5379,6 +5381,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321027135}
   m_CullTransparentMesh: 1
+--- !u!1 &1386919909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386919911}
+  - component: {fileID: 1386919910}
+  m_Layer: 0
+  m_Name: GameSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1386919910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386919909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1662f18a12644fc8391ae69125d812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WebGLUrlPlayerSetup
+--- !u!4 &1386919911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386919909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 806.52856, y: 530.40454, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1417812493
 GameObject:
   m_ObjectHideFlags: 0
@@ -6847,8 +6893,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3066c3288506a4bb48b7dfc0d834fdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeacherPanelAccess
-  controlPanel: {fileID: 1507376445}
-  openTeacherPanelButton: {fileID: 1877664417}
+  teacherAddCardPanel: {fileID: 1905500891}
+  deckIdInput: {fileID: 936390952}
+  cardNameInput: {fileID: 224136484}
+  cardTextInput: {fileID: 1604702005}
+  descriptionInput: {fileID: 1457519552}
+  frontImageUrlInput: {fileID: 772816602}
+  backImageUrlInput: {fileID: 58913618}
+  addCardButton: {fileID: 252657940}
+  deckViewerPanel: {fileID: 1747532815}
+  boardEditorPanel: {fileID: 2133209505}
+  boardEditButton: {fileID: 694093735}
 --- !u!1 &1832360555
 GameObject:
   m_ObjectHideFlags: 0
@@ -8659,8 +8714,8 @@ SceneRoots:
   - {fileID: 303248137}
   - {fileID: 959490826}
   - {fileID: 1801218360}
-  - {fileID: 353916597}
   - {fileID: 840242244}
+  - {fileID: 353916597}
   - {fileID: 2129281309}
   - {fileID: 1965950930}
   - {fileID: 469129928}
@@ -8670,3 +8725,4 @@ SceneRoots:
   - {fileID: 205114142}
   - {fileID: 1170948577}
   - {fileID: 25867092}
+  - {fileID: 1386919911}

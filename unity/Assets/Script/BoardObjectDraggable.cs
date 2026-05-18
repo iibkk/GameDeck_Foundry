@@ -36,21 +36,48 @@ public class BoardObjectDraggable : MonoBehaviour
         {
             if (myCollider.OverlapPoint(mouseWorld))
             {
+                boardEditor.SelectPile(GetComponent<midCardDrop>());      // students can select but cannot drag
+
+                string role = PlayerPrefs.GetString("role", "student");
+
+                if (role != "teacher")
+                {
+                    Debug.Log("Student cannot drag piles");
+                    return;
+                }
+
                 dragging = true;
-                boardEditor.SelectPile(GetComponent<midCardDrop>());
+
+                offset = transform.position - new Vector3(mouseWorld.x, mouseWorld.y, transform.position.z);
+
                 Debug.Log("Start dragging: " + gameObject.name);
             }
         }
 
         if (Mouse.current.leftButton.isPressed && dragging)
         {
-            transform.position = new Vector3(mouseWorld.x, mouseWorld.y, transform.position.z) + offset;
-        }
+            transform.position =
+                new Vector3(mouseWorld.x, mouseWorld.y, transform.position.z) + offset;
 
+            if (boardEditor.multiplayer != null)
+            {
+                boardEditor.multiplayer.SendMovePile(
+                    gameObject.name,
+                    transform.position
+                );
+            }
+        }
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             if (dragging)
+            {
                 Debug.Log("Stop dragging: " + gameObject.name);
+
+                if (boardEditor.multiplayer != null)
+                {
+                    boardEditor.multiplayer.SendMovePile(gameObject.name, transform.position);
+                }
+            }
 
             dragging = false;
         }

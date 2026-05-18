@@ -14,6 +14,12 @@ public class DeckCardItem : MonoBehaviour
     private int deckId;
     private DeckViewerUI deckViewer;
 
+    void Start()
+    {
+        string role = PlayerPrefs.GetString("role", "student");
+        deleteButton.gameObject.SetActive(role == "teacher");
+    }
+
     public void Setup(DeckViewerUI.CardData card, DeckViewerUI viewer)
     {
         cardId = card.id;
