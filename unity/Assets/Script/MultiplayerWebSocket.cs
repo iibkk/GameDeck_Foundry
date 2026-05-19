@@ -11,7 +11,7 @@ public class MultiplayerWebSocket : MonoBehaviour
     public Transform playZonePoint;
 
     private WebSocket websocket;
-    private int sessionId;
+    private string sessionId;
     private string playerName;
     private string clientId;
     public string pile_id;
@@ -31,7 +31,7 @@ public class MultiplayerWebSocket : MonoBehaviour
         instance = this;
 
         clientId = System.Guid.NewGuid().ToString();
-        sessionId = PlayerPrefs.GetInt("sessionId", 1);
+        sessionId = PlayerPrefs.GetString("roomCode", "TESTROOM");
         playerName = PlayerPrefs.GetString("playerName", "User");
 
         websocket = new WebSocket("ws://127.0.0.1:3000");
@@ -190,6 +190,7 @@ public class MultiplayerWebSocket : MonoBehaviour
             Debug.LogError("Target object has no midCardDrop: " + msg.pile_id);
             return;
         }
+        targetPile.currCards.RemoveAll(c => c == null);
 
         Card newCard = Instantiate(cardPrefab, pileObj.transform.position, Quaternion.identity);
 
@@ -208,14 +209,17 @@ public class MultiplayerWebSocket : MonoBehaviour
     void RemoveCardFromPlayZone(int cardId)
     {
         if (!playedCards.ContainsKey(cardId))
-        {
             return;
-        }
 
         Card card = playedCards[cardId];
 
         if (card != null)
         {
+            if (card.currPile != null)
+            {
+                card.currPile.currCards.Remove(card);
+            }
+
             Destroy(card.gameObject);
         }
 
@@ -283,7 +287,7 @@ public class MultiplayerWebSocket : MonoBehaviour
     public class WebSocketMessage
     {
         public string type;
-        public int session_id;
+        public string session_id;
         public string player_name;
         public string message;
         public int card_id;

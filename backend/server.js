@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.js';
 import sessionRoutes from './routes/session.js';
 import cardRoutes from './routes/card.js';
 import gameRoutes from './routes/game.js';
+import roomRoutes from './routes/room.js';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/session', sessionRoutes);
 app.use('/api/cards', cardRoutes);
 app.use('/api/game', gameRoutes);
+app.use('/api/room', roomRoutes);
 
 app.get('/', (req, res) => {
   res.send('GameDeck Backend Running');

@@ -48,6 +48,12 @@ public class BoardEditorManager : MonoBehaviour
 
         newPile.gameObject.name = "Pile_" + pileCounter;
         pileCounter++;
+        midCardDrop drop = newPile.GetComponent<midCardDrop>();
+        if (drop != null)
+        {
+            drop.multiplayer = multiplayer;
+            drop.announcementUI = multiplayer.announcementUI;
+        }
 
         BoardObjectDraggable drag =
             newPile.GetComponent<BoardObjectDraggable>();
@@ -121,6 +127,13 @@ public class BoardEditorManager : MonoBehaviour
             Instantiate(pilePrefab, position, Quaternion.identity);
 
         newPile.gameObject.name = pileId;
+
+        midCardDrop drop = newPile.GetComponent<midCardDrop>();
+        if (drop != null)
+        {
+            drop.multiplayer = multiplayer;
+            drop.announcementUI = multiplayer.announcementUI;
+        }
 
         BoardObjectDraggable drag =
             newPile.GetComponent<BoardObjectDraggable>();
