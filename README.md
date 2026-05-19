@@ -1,7 +1,3 @@
-Important： move copy Biuld file to This Path from GameDeck_Foundry-Unity_backend_linked
-
-
-
 # EnzeZm-login
 
 

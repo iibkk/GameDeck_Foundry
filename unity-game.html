@@ -7,9 +7,48 @@
     <title>Unity Web Player | GameDeckFoundary</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #231f20;
+        }
+
+        #unity-container,
+        #unity-canvas {
+            width: 100vw !important;
+            height: 100vh !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="roomCodeDisplay" style="
+        position: absolute; 
+        top: 20px; 
+        left: 20px; 
+        z-index: 1000; 
+        background-color: rgba(0, 0, 0, 0.8); 
+        color: #00ff00; 
+        padding: 10px 20px; 
+        font-family: Arial, sans-serif; 
+        font-size: 24px; 
+        font-weight: bold; 
+        border-radius: 8px; 
+        border: 2px solid #00ff00;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    ">
+        Room Code: <span id="codeValue">Loading...</span>
+    </div>
+
     <div id="unity-container" class="unity-desktop">
         <canvas id="unity-canvas" width=1280 height=720 tabindex="-1"></canvas>
         <div id="unity-loading-bar">
@@ -19,21 +58,41 @@
             </div>
         </div>
         <div id="unity-warning"> </div>
-        <div id="unity-footer">
+        <div id="unity-footer" style="display: none;">
             <div id="unity-logo-title-footer"></div>
             <div id="unity-fullscreen-button"></div>
             <div id="unity-build-title">GameDeckFoundary</div>
         </div>
     </div>
+
     <script>
+        // 在 Unity 启动前，直接通过 localStorage 把名字“骗”给它
+        const urlParams = new URLSearchParams(window.location.search);
+        const teacherName = urlParams.get('name');
+        if (teacherName) {
+            localStorage.setItem('gameDeckPlayerName', teacherName);
+            console.log("已将 URL 名字注入 localStorage，等待 Unity 读取...");
+        }
+    </script>
+
+    <script>
+        // 🚨 新增：页面加载时，立刻从网址里提取房间号并显示出来
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomCode = urlParams.get('roomCode'); // 从网址中抓取 roomCode
+
+            const codeSpan = document.getElementById('codeValue');
+            if (roomCode) {
+                codeSpan.textContent = roomCode; // 抓到了就显示
+            } else {
+                // 如果网址里没有，就去缓存里找兜底的
+                const savedCode = localStorage.getItem('gameDeckRoomCode');
+                codeSpan.textContent = savedCode ? savedCode : "N/A";
+            }
+        });
+
         var canvas = document.querySelector("#unity-canvas");
 
-        // Shows a temporary message banner/ribbon for a few seconds, or
-        // a permanent error message on top of the canvas if type=='error'.
-        // If type=='warning', a yellow highlight color is used.
-        // Modify or remove this function to customize the visually presented
-        // way that non-critical warnings and error messages are presented to the
-        // user.
         function unityShowBanner(msg, type) {
             var warningBanner = document.querySelector("#unity-warning");
             function updateBannerVisibility() {
@@ -65,47 +124,16 @@
             productName: "GameDeckFoundary",
             productVersion: "1.0",
             showBanner: unityShowBanner,
-            // errorHandler: function(err, url, line) {
-            //    alert("error " + err + " occurred at line " + line);
-            //    // Return 'true' if you handled this error and don't want Unity
-            //    // to process it further, 'false' otherwise.
-            //    return true;
-            // },
         };
 
-        // By default, Unity keeps WebGL canvas render target size matched with
-        // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-        // Set this to false if you want to decouple this synchronization from
-        // happening inside the engine, and you would instead like to size up
-        // the canvas DOM size and WebGL render target sizes yourself.
-        // config.matchWebGLToCanvasSize = false;
-
-        // If you would like all file writes inside Unity Application.persistentDataPath
-        // directory to automatically persist so that the contents are remembered when
-        // the user revisits the site the next time, uncomment the following line:
-        // config.autoSyncPersistentDataPath = true;
-        // This autosyncing is currently not the default behavior to avoid regressing
-        // existing user projects that might rely on the earlier manual
-        // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
-        // expected to change.
-
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-            // Mobile device style: fill the whole browser client area with the game canvas:
-
             var meta = document.createElement('meta');
             meta.name = 'viewport';
             meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
             document.getElementsByTagName('head')[0].appendChild(meta);
             document.querySelector("#unity-container").className = "unity-mobile";
             canvas.className = "unity-mobile";
-
-            // To lower canvas resolution on mobile devices to gain some
-            // performance, uncomment the following line:
-            // config.devicePixelRatio = 1;
-
-
         } else {
-            // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
             canvas.style.width = "1280px";
             canvas.style.height = "720px";
         }
@@ -122,27 +150,17 @@
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                     unityInstance.SetFullscreen(1);
                 };
-                const role = localStorage.getItem('gameDeckRole');
-                const roomCode = localStorage.getItem('gameDeckRoomCode');
-                const sessionId = localStorage.getItem('gameDeckSessionId');
-                const studentId = localStorage.getItem('gameDeckStudentId') || "";
 
-                if (role) {
-                    const payload = JSON.stringify({
-                        role: role,
-                        roomCode: roomCode,
-                        sessionId: sessionId,
-                        studentId: studentId
-                    });
+                const urlParams = new URLSearchParams(window.location.search);
+                const teacherName = urlParams.get('name'); // 对应你网址里的 name 参数
 
-                    console.log("🚀 [前端桥梁] 游戏加载完毕，发射数据给 Unity: ", payload);
+                if (teacherName) {
+                    console.log("🚀 正在强行推送真名到 Unity (GameManager):", teacherName);
 
-                    // 核心通讯：发送给 Unity 里的 APIManager！
-                    // (前提：你队友在 APIManager.cs 里写了 ReceiveGameData 函数)
-                    unityInstance.SendMessage('APIManager', 'ReceiveGameData', payload);
-                } else {
-                    console.warn("⚠️ [前端桥梁] 没找到身份数据，是直接打开了这个网页吗？");
+                    unityInstance.SendMessage('GameManager', 'SetPlayerName', teacherName);
                 }
+
+                console.log("✅ 游戏加载完毕！Unity 已收到指令。");
 
             }).catch((message) => {
                 alert(message);
