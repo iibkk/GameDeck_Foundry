@@ -68,7 +68,7 @@ registerForm.addEventListener('submit', async (e) => {
 
   try {
     // Send POST request to backend (assuming Node.js runs on localhost:3000)(register change here)
-    const response = await fetch('http://localhost:3000/api/auth/register', {
+    const response = await fetch('http://localhost:3001/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, full_name: username, password: password })
@@ -82,7 +82,7 @@ registerForm.addEventListener('submit', async (e) => {
 
       try {
         // 2. 
-        const loginResponse = await fetch('http://localhost:3000/api/auth/login', {
+        const loginResponse = await fetch('http://localhost:3001/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email, password: password })
@@ -126,7 +126,7 @@ loginForm.addEventListener('submit', async (e) => {
   const password = inputs[1].value;
 
   try {//(teacher login URL change here)
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch('http://localhost:3001/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, password: password })
