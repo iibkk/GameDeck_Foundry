@@ -49,6 +49,28 @@
         Room Code: <span id="codeValue">Loading...</span>
     </div>
 
+    <div id="roomCodeDisplay" style="...">
+        Room Code: <span id="codeValue">Loading...</span>
+    </div>
+
+    <div id="roleDisplay" style="
+        position: absolute; 
+        top: 20px; 
+        right: 20px; /* 👈 核心：把它钉在屏幕右上角 */
+        z-index: 1000; 
+        background-color: rgba(0, 0, 0, 0.8); 
+        color: #ff9900; /* 用亮橙色区分一下，更醒目 */
+        padding: 10px 20px; 
+        font-family: Arial, sans-serif; 
+        font-size: 24px; 
+        font-weight: bold; 
+        border-radius: 8px; 
+        border: 2px solid #ff9900;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    ">
+        Role: <span id="roleValue">Loading...</span>
+    </div>
+
     <div id="unity-container" class="unity-desktop">
         <canvas id="unity-canvas" width=1280 height=720 tabindex="-1"></canvas>
         <div id="unity-loading-bar">
@@ -85,9 +107,17 @@
             if (roomCode) {
                 codeSpan.textContent = roomCode; // 抓到了就显示
             } else {
-                // 如果网址里没有，就去缓存里找兜底的
+
                 const savedCode = localStorage.getItem('gameDeckRoomCode');
                 codeSpan.textContent = savedCode ? savedCode : "N/A";
+            }
+            const role = urlParams.get('role'); // 从网址抓取 'teacher' 或 'student'
+            const roleSpan = document.getElementById('roleValue');
+            if (role) {
+                roleSpan.textContent = role.charAt(0).toUpperCase() + role.slice(1);
+            } else {
+                const savedRole = localStorage.getItem('gameDeckRole');
+                roleSpan.textContent = savedRole ? (savedRole.charAt(0).toUpperCase() + savedRole.slice(1)) : "Guest";
             }
         });
 
