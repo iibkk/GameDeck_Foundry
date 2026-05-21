@@ -1,5 +1,5 @@
 # EnzeZm-login
-
+First important: move the Build file from backend_linked to this paths
 
 teacher login port： POST /api/auth/register
 
