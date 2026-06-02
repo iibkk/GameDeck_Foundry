@@ -74,10 +74,7 @@ registerForm.addEventListener('submit', async (e) => {
       alert('Registration successful! Automatically logging you in...');
 
       try {
-<<<<<<< HEAD
-=======
         // 2. 
->>>>>>> e1151ec81ad9be5687041646692dcb30ebb276a9
         const loginResponse = await fetch('http://localhost:3001/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

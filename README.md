@@ -1,8 +1,6 @@
 <<<<<<< HEAD
 # EnzeZm-login
-First important: move the Build file from unity_backend_linked to this paths
-
-How to find this Build folder unity_backend_linked  /  unity / WebGl / build
+First important: move the Build file from backend_linked to this paths
 
 teacher login port： POST /api/auth/register
 
