@@ -1,6 +1,20 @@
 <<<<<<< HEAD
 # EnzeZm-login
-First important: move the Build file from backend_linked to this paths
+First important: move the Build file from unity_backend_linked to this paths
+unity_backend_linked / unity / WebGl / Build
+
+PS D:\ICT_project1_private\GameDeck_Foundry-Unity_backend_linked\GameDeck_Foundry-Unity_backend_linked\unity\WebGl>  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+PS D:\ICT_project1_private\GameDeck_Foundry-Unity_backend_linked\GameDeck_Foundry-Unity_backend_linked\unity\WebGl> npx http-server -p 8080
+This is for unity backend
+
+PS D:\ICT_project1_private\GameDeck_Foundry-Unity_backend_linked\GameDeck_Foundry-Unity_backend_linked\backend> npm start
+This is for unity game backend
+
+
+PS D:\ICT_project1_private\GameDeck_Foundry-backend_api\backend> npm start
+this is for login data backend
+
+
 
 teacher login port： POST /api/auth/register
 
