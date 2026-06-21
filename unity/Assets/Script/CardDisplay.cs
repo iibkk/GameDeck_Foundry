@@ -22,27 +22,42 @@ public class CardDisplay : MonoBehaviour
     }
 
     public void SetFaceUp(bool faceUp)
+{
+    isFaceUp = faceUp;
+
+    bool hasFront = !string.IsNullOrEmpty(frontImageUrl) && frontImageUrl.StartsWith("http");
+
+    if (frontImage != null)
     {
-        isFaceUp = faceUp;
-        bool hasFront = !string.IsNullOrEmpty(frontImageUrl) && frontImageUrl.StartsWith("http");
-
-        if (frontImage != null)
-            frontImage.gameObject.SetActive(faceUp && hasFront);
-
-        if (backImage != null)
-            backImage.gameObject.SetActive(!faceUp); // always show Unity back sprite
-
-        if (cardNameText != null)
-            cardNameText.gameObject.SetActive(faceUp);
-
-        if (cardText != null)
-            cardText.gameObject.SetActive(faceUp);
-
-        if (cardTextBackground != null)
-            cardTextBackground.gameObject.SetActive(faceUp);
-
-        SetSortingOrder(0);
+        frontImage.gameObject.SetActive(faceUp && hasFront);
     }
+
+    if (backImage != null)
+    {
+        backImage.gameObject.SetActive(!faceUp);
+    }
+
+    if (cardNameText != null)
+        cardNameText.gameObject.SetActive(faceUp);
+
+    if (cardText != null)
+        cardText.gameObject.SetActive(faceUp);
+
+    if (cardTextBackground != null)
+        cardTextBackground.gameObject.SetActive(faceUp);
+
+    if (!faceUp && backImage != null)
+    {
+        backImage.sortingOrder = 50;
+    }
+
+    if (faceUp && frontImage != null)
+    {
+        frontImage.sortingOrder = 1;
+    }
+
+    SetSortingOrder(0);
+}
 
     public void SetCardInfo(string name, string text, string frontUrl = "", string backUrl = "")
     {
@@ -164,25 +179,25 @@ public class CardDisplay : MonoBehaviour
     }
 
     public void SetSortingOrder(int order)
+{
+    if (cardBackground != null)
+        cardBackground.sortingOrder = order;
+
+    if (frontImage != null)
+        frontImage.sortingOrder = order + 1;
+
+    if (backImage != null)
+        backImage.sortingOrder = isFaceUp ? order + 1 : order + 50;
+
+    if (cardTextBackground != null)
+        cardTextBackground.sortingOrder = order + 2;
+
+    MeshRenderer[] texts = GetComponentsInChildren<MeshRenderer>();
+    foreach (MeshRenderer text in texts)
     {
-        if (cardBackground != null)
-            cardBackground.sortingOrder = order;
-
-        if (frontImage != null)
-            frontImage.sortingOrder = order + 1;
-
-        if (backImage != null)
-            backImage.sortingOrder = order + 1;
-
-        if (cardTextBackground != null)
-            cardTextBackground.sortingOrder = order + 2;
-
-        MeshRenderer[] texts = GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer text in texts)
-        {
-            text.sortingOrder = order + 10;
-        }
+        text.sortingOrder = order + 10;
     }
+}
     public string GetCardName()
     {
         return cardNameText != null ? cardNameText.text : "card";

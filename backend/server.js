@@ -67,7 +67,8 @@ wss.on('connection', (ws) => {
         card_id: data.card_id,
         pile_id: data.pile_id,
         front_image_url: data.front_image_url,
-        back_image_url: data.back_image_url
+        back_image_url: data.back_image_url,
+        face_up: data.face_up
       });
     }
 
