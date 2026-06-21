@@ -32,7 +32,7 @@ public class TeacherPanelAccess : MonoBehaviour
         cardTextInput.SetActive(isTeacher);
         descriptionInput.SetActive(isTeacher);
         frontImageUrlInput.SetActive(isTeacher);
-        backImageUrlInput.SetActive(isTeacher);
+        backImageUrlInput.SetActive(false);
         addCardButton.SetActive(isTeacher);
         deckViewerPanel.SetActive(true);
         boardEditButton.SetActive(true);

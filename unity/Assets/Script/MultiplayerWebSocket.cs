@@ -15,6 +15,8 @@ public class MultiplayerWebSocket : MonoBehaviour
     private string playerName;
     private string clientId;
     public string pile_id;
+    public string front_image_url;
+    public string back_image_url;
     private Dictionary<int, Card> playedCards = new Dictionary<int, Card>();
     private static MultiplayerWebSocket instance;
 
@@ -133,7 +135,7 @@ public class MultiplayerWebSocket : MonoBehaviour
         await websocket.SendText(JsonUtility.ToJson(msg));
     }
 
-    public async void SendPlayCard(string cardName, string cardText, int cardId, string pileId)
+    public async void SendPlayCard(string cardName, string cardText, int cardId, string pileId, string frontUrl, string backUrl, bool faceUp)
     {
         WebSocketMessage msg = new WebSocketMessage
         {
@@ -144,7 +146,9 @@ public class MultiplayerWebSocket : MonoBehaviour
             card_text = cardText,
             client_id = clientId,
             card_id = cardId,
-            pile_id = pileId
+            pile_id = pileId,
+            front_image_url = frontUrl,
+            face_up = faceUp
         };
 
         await websocket.SendText(JsonUtility.ToJson(msg));
@@ -194,15 +198,25 @@ public class MultiplayerWebSocket : MonoBehaviour
 
         Card newCard = Instantiate(cardPrefab, pileObj.transform.position, Quaternion.identity);
 
+        newCard.transform.localScale = Vector3.one;
+        newCard.transform.rotation = Quaternion.identity;
         CardDisplay display = newCard.GetComponent<CardDisplay>();
         if (display != null)
         {
-            display.SetCardInfo(msg.card_name, msg.card_text);
+            display.SetCardInfo(
+            msg.card_name,
+            msg.card_text,
+            msg.front_image_url,
+            msg.back_image_url
+        );
+            display.SetFaceUp(msg.face_up);
+            display.SetSortingOrder(20);
         }
 
         newCard.currPile = targetPile;
         targetPile.currCards.Add(newCard);
         targetPile.UpdateCardPosition(newCard);
+        newCard.transform.localScale = Vector3.one;
 
         playedCards.Add(msg.card_id, newCard);
     }
@@ -294,8 +308,11 @@ public class MultiplayerWebSocket : MonoBehaviour
         public string client_id;
         public string card_name;
         public string card_text;
+        public string front_image_url;
+        public string back_image_url;
         public string pile_id;
         public float x;
         public float y;
+        public bool face_up;
     }
 }

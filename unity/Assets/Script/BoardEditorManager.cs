@@ -16,6 +16,8 @@ public class BoardEditorManager : MonoBehaviour
     public MultiplayerWebSocket multiplayer;
     private int pileCounter = 0;
 
+    private bool cardsFaceUp = true;
+
 
 
     void Start()
@@ -172,17 +174,21 @@ public class BoardEditorManager : MonoBehaviour
 
         Debug.Log("Selected pile shuffled");
     }
-    private bool cardsFaceUp = true;
     public void FlipCards()
     {
-        if (!IsTeacher()) return;
         cardsFaceUp = !cardsFaceUp;
 
-        Composition.Card[] allCards = FindObjectsByType<Composition.Card>(FindObjectsSortMode.None);
+        Composition.Card[] allCards =
+            FindObjectsByType<Composition.Card>(FindObjectsSortMode.None);
 
         foreach (Composition.Card card in allCards)
         {
-            card.SetFaceUp(cardsFaceUp);
+            CardDisplay display = card.GetComponent<CardDisplay>();
+
+            if (display != null)
+            {
+                display.SetFaceUp(cardsFaceUp);
+            }
         }
     }
     public void ApplyMovePile(string pileId, Vector3 position)

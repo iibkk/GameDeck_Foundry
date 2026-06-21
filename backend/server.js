@@ -65,7 +65,9 @@ wss.on('connection', (ws) => {
         card_text: data.card_text,
         client_id: data.client_id,
         card_id: data.card_id,
-        pile_id: data.pile_id
+        pile_id: data.pile_id,
+        front_image_url: data.front_image_url,
+        back_image_url: data.back_image_url
       });
     }
 
@@ -109,6 +111,13 @@ wss.on('connection', (ws) => {
         x: data.x,
         y: data.y
       });
+    }
+    //flip card
+    if (data.type === "flip_cards") {
+    broadcast(data.session_id, {
+        type: "flip_cards",
+        face_up: data.face_up
+    });
     }
   });
 

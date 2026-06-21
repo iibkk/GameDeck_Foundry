@@ -99,7 +99,7 @@ public class handManager : midCardDrop
         CardDisplay display = g.GetComponent<CardDisplay>();
         if (display != null)
         {
-            display.SetCardInfo(data.card_name, data.card_text);
+            display.SetCardInfo(data.card_name, data.card_text, data.front_image_url,data.back_image_url);
         }
 
         AddCard(g);

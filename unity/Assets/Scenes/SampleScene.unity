@@ -4618,6 +4618,8 @@ MonoBehaviour:
   cardPrefab: {fileID: 2558309233127548092, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
   playZonePoint: {fileID: 25867092}
   pile_id: 
+  front_image_url: 
+  back_image_url: 
   boardEditor: {fileID: 564758596}
 --- !u!4 &1170948577
 Transform:
@@ -8742,6 +8744,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 7941478381954921894, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+      propertyPath: backImage
+      value: 
+      objectReference: {fileID: 7567611877083359108}
+    - target: {fileID: 7941478381954921894, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+      propertyPath: frontImage
+      value: 
+      objectReference: {fileID: 7567611877083359109}
+    - target: {fileID: 8841183556027978305, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8841183556027978305, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9131223639532038870, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
       propertyPath: m_Name
       value: Card
@@ -8754,13 +8772,23 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9131223639532038870, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5490255158499132226, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 4371131520898961339, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5490255158499132226, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+--- !u!212 &7567611877083359108 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 191332096639321766, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+  m_PrefabInstance: {fileID: 7567611877083359107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7567611877083359109 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 203139529341093157, guid: 21ff7e4f56b5146708265b8694d37100, type: 3}
+  m_PrefabInstance: {fileID: 7567611877083359107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8288684494991730257
 PrefabInstance:
   m_ObjectHideFlags: 0

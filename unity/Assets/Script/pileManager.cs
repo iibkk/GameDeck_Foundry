@@ -4,26 +4,25 @@ using DG.Tweening;
 public class pileManager : midCardDrop
 {
     [SerializeField] private float boardScale = 1f;
-    public override void UpdateCardPosition(Card card)
+   public override void UpdateCardPosition(Card card)
+{
+    for (int i = 0; i < currCards.Count; i++)
     {
-        for (int i = 0; i < currCards.Count; i++)
+        Card c = currCards[i];
+
+        // all cards stack in same place
+        c.transform.position = transform.position;
+        c.transform.rotation = Quaternion.identity;
+        c.transform.localScale = Vector3.one;
+
+        CardDisplay display = c.GetComponent<CardDisplay>();
+        if (display != null)
         {
-            currCards[i].transform.DOKill();                                // stop any previous tween on this card
-
-            Vector3 pos = transform.position;
-            pos.z = 0f;                                                     // keep card on the 2D plane
-
-            currCards[i].transform.DOMove(pos, 0.2f);                           // move card to board position
-            currCards[i].transform.DORotate(Vector3.zero, 0.2f);                // reset rotation to normal
-            currCards[i].transform.DOScale(Vector3.one, 0.2f);     // reset size for board
-
-            CardDisplay display = currCards[i].GetComponent<CardDisplay>();
-            if (display != null)
-            {
-                display.SetSortingOrder(i * 2);                             // control which card draws on top
-            }
+            // later card gets higher sorting order
+            display.SetSortingOrder(i * 20);
         }
     }
+}
     public void ShufflePile()
     {
         for (int i = 0; i < currCards.Count; i++)

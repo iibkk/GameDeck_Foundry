@@ -23,6 +23,8 @@ public class midCardDrop : MonoBehaviour, IDropArea
         }
 
         card.transform.SetParent(null, true);
+        card.transform.localScale = Vector3.one;
+        card.transform.rotation = Quaternion.identity;
         AddCard(card);
 
         if (!(this is handManager))
@@ -41,11 +43,11 @@ public class midCardDrop : MonoBehaviour, IDropArea
         ? display.cardText.text
         : "";
 
-                multiplayer.SendPlayCard(cardName, cardText, card.GetInstanceID(), gameObject.name);
+                multiplayer.SendPlayCard(cardName, cardText, card.GetInstanceID(), gameObject.name, display.frontImageUrl, display.backImageUrl, display.IsFaceUp());
             }
         }
-        
-        Debug.Log("Card Drop here");        
+
+        Debug.Log("Card Drop here");
     }
 
 
@@ -69,6 +71,23 @@ public class midCardDrop : MonoBehaviour, IDropArea
 
     public virtual void UpdateCardPosition(Card card)
     {
+        float spacing = 2.2f;
 
+        for (int i = 0; i < currCards.Count; i++)
+        {
+            Card c = currCards[i];
+
+            float startX = -((currCards.Count - 1) * spacing) / 2f;
+            Vector3 offset = new Vector3(startX + i * spacing, 0, 0);
+
+            c.transform.position = transform.position + offset;
+            c.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+            CardDisplay display = c.GetComponent<CardDisplay>();
+            if (display != null)
+            {
+                display.SetSortingOrder(i * 10);
+            }
+        }
     }
 }
