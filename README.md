@@ -35,7 +35,7 @@ Purpose: Highly recommended for reviewing the codebase and utilizing the "Live S
 Download: https://code.visualstudio.com/
 
 
-
+Start running
 --------------------------------------------------------------------------------------------------------------------------------------
 
 Configure Login Database Credentials (.env) Login and user data for this project are stored in a local PostgreSQL database. You must configure the database password in the backend folder.
