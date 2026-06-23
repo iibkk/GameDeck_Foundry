@@ -1,3 +1,38 @@
+Prerequisites & Environment Setup
+To evaluate and run this project locally, the host machine must have the following software installed. Please ensure these are configured before proceeding to the deployment steps.
+
+1. Node.js (v20.0 or higher recommended)
+
+Purpose: Required to run the backend microservices, manage packages via npm, and host the local static server via npx.
+
+Download: https://nodejs.org/
+
+Verification: Open a terminal and run node -v to ensure it is installed correctly.
+
+2. PostgreSQL (v16.0 or higher recommended)
+
+Purpose: Required for the local database to store user authentication and game session data.
+
+Download: https://www.postgresql.org/download/
+
+Important: Please keep track of the superuser (postgres) password you set during the installation process, as you will need to input it into the .env files in Phase 1.
+
+3. Modern Web Browser
+
+Purpose: Required for optimal Unity WebGL rendering and WebSocket real-time communication.
+
+Requirement: Google Chrome, Microsoft Edge, or Mozilla Firefox (Latest Versions). Safari is not officially recommended for this WebGL build.
+
+4. Visual Studio Code & Live Server (Optional but Recommended)
+
+Purpose: Highly recommended for reviewing the codebase and utilizing the "Live Server" extension for a seamless frontend launch.
+
+Download: https://code.visualstudio.com/
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
 Configure Login Database Credentials (.env) Login and user data for this project are stored in a local PostgreSQL database. You must configure the database password in the backend folder.
 Target Path: [Your unzipped directory]\GameDeck_Foundry-backend_api\backend.env Also "D:\ICT_project1_private\GameDeck_Foundry-Unity_backend_linked\GameDeck_Foundry-Unity_backend_linked\backend.env"
 
